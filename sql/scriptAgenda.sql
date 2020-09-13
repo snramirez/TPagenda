@@ -1,5 +1,5 @@
-CREATE DATABASE `agenda`;
-USE agenda;
+CREATE DATABASE `grupo7`;
+USE grupo7;
 CREATE TABLE `personas`
 (
   `idPersona` int(11) NOT NULL AUTO_INCREMENT,
