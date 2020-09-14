@@ -15,6 +15,7 @@ public class VentanaPersona extends JFrame
 	private JTextField txtTelefono;
 	private JButton btnAgregarPersona;
 	private static VentanaPersona INSTANCE;
+	private JTextField textField;
 	
 	public static VentanaPersona getInstance()
 	{
@@ -32,14 +33,14 @@ public class VentanaPersona extends JFrame
 		super();
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 343, 183);
+		setBounds(100, 100, 345, 315);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(10, 11, 307, 123);
+		panel.setBounds(10, 11, 307, 254);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
@@ -62,8 +63,17 @@ public class VentanaPersona extends JFrame
 		txtTelefono.setColumns(10);
 		
 		btnAgregarPersona = new JButton("Agregar");
-		btnAgregarPersona.setBounds(208, 92, 89, 23);
+		btnAgregarPersona.setBounds(208, 220, 89, 23);
 		panel.add(btnAgregarPersona);
+		
+		JLabel lblNewLabel = new JLabel("Otro item");
+		lblNewLabel.setBounds(10, 91, 46, 14);
+		panel.add(lblNewLabel);
+		
+		textField = new JTextField();
+		textField.setBounds(133, 88, 164, 20);
+		panel.add(textField);
+		textField.setColumns(10);
 		
 		this.setVisible(false);
 	}
@@ -94,6 +104,5 @@ public class VentanaPersona extends JFrame
 		this.txtTelefono.setText(null);
 		this.dispose();
 	}
-	
 }
 
