@@ -59,7 +59,7 @@ public class Controlador implements ActionListener
 			
 			this.agenda.agregarDireccion(direccion);
 			DireccionDTO ultimaDir = this.agenda.ultimaDireccion();
-			PersonaDTO nuevaPersona = new PersonaDTO(id, nombre, tel, email,null,ultimaDir,ventanaEditarPersona.getTipo());
+			PersonaDTO nuevaPersona = new PersonaDTO(id, nombre, tel, email,fecha_nacimiento,ultimaDir,ventanaEditarPersona.getTipo());
 			this.agenda.editarPersona(nuevaPersona);
 			this.refrescarTabla();
 			this.ventanaEditarPersona.cerrar();
