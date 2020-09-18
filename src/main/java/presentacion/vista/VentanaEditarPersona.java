@@ -1,5 +1,9 @@
 package presentacion.vista;
 
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+
 import java.util.List;
 
 import javax.swing.JButton;
@@ -14,14 +18,14 @@ import dto.TipoContactoDTO;
 
 import javax.swing.JComboBox;
 
-public class VentanaPersona extends JFrame 
+public class VentanaEditarPersona extends JFrame 
 {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField txtNombre;
 	private JTextField txtTelefono;
-	private JButton btnAgregarPersona;
-	private static VentanaPersona INSTANCE;
+	private JButton btnEditarPersona;
+	private static VentanaEditarPersona INSTANCE;
 	private JTextField txtCalle;
 	private JTextField txtAltura;
 	private JTextField txtPiso;
@@ -33,18 +37,18 @@ public class VentanaPersona extends JFrame
 	private JComboBox<String> comboPais;
 	private JComboBox<String> comboLocalidad;
 	
-	public static VentanaPersona getInstance()
+	public static VentanaEditarPersona getInstance()
 	{
 		if(INSTANCE == null)
 		{
-			INSTANCE = new VentanaPersona(); 	
-			return new VentanaPersona();
+			INSTANCE = new VentanaEditarPersona(); 	
+			return new VentanaEditarPersona();
 		}
 		else
 			return INSTANCE;
 	}
 
-	private VentanaPersona() 
+	private VentanaEditarPersona() 
 	{
 		super();
 		
@@ -78,9 +82,9 @@ public class VentanaPersona extends JFrame
 		panel.add(txtTelefono);
 		txtTelefono.setColumns(10);
 		
-		btnAgregarPersona = new JButton("Agregar");
-		btnAgregarPersona.setBounds(208, 300, 89, 23);
-		panel.add(btnAgregarPersona);
+		btnEditarPersona = new JButton("Editar");
+		btnEditarPersona.setBounds(208, 300, 89, 23);
+		panel.add(btnEditarPersona);
 		
 		JLabel lblCalle = new JLabel("Calle:");
 		lblCalle.setBounds(10, 203, 46, 14);
@@ -140,7 +144,7 @@ public class VentanaPersona extends JFrame
 		panel.add(lblCumpleaños);
 		
 		txtCumpleaños = new JTextField();
-		txtCumpleaños.setText("AAAA/MM/DD");
+		txtCumpleaños.setText("DD/MM");
 		txtCumpleaños.setToolTipText("");
 		txtCumpleaños.setBounds(94, 269, 86, 20);
 		panel.add(txtCumpleaños);
@@ -232,9 +236,9 @@ public class VentanaPersona extends JFrame
 	public JComboBox getPais(){return comboPais;}
 	public JComboBox getProvincia(){return comboProvincia;}
 
-	public JButton getBtnAgregarPersona() 
+	public JButton getBtnEditarPersona() 
 	{
-		return btnAgregarPersona;
+		return btnEditarPersona;
 	}
 
 	public void cerrar()
@@ -244,4 +248,3 @@ public class VentanaPersona extends JFrame
 		this.dispose();
 	}
 }
-

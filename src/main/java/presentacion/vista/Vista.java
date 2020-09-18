@@ -11,10 +11,12 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import dto.DireccionDTO;
 import dto.PersonaDTO;
 
 import javax.swing.JButton;
 
+import dto.TipoContactoDTO;
 import persistencia.conexion.Conexion;
 
 public class Vista
@@ -24,8 +26,10 @@ public class Vista
 	private JButton btnAgregar;
 	private JButton btnBorrar;
 	private JButton btnReporte;
+	private JButton btnEditar;
 	private DefaultTableModel modelPersonas;
-	private  String[] nombreColumnas = {"Nombre y apellido","Telefono"};
+	private  String[] nombreColumnas = {"Nombre y apellido","Telefono","Email","Pais",
+			"Provincia","Localidad","Calle","Altura","Piso","Depto","Cumpleaños","Tipo de contacto"};
 
 	public Vista() 
 	{
@@ -37,17 +41,17 @@ public class Vista
 	private void initialize() 
 	{
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(100, 100, 800, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(0, 0, 434, 262);
+		panel.setBounds(0, 0, 784, 262);
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);
 		
 		JScrollPane spPersonas = new JScrollPane();
-		spPersonas.setBounds(10, 11, 414, 182);
+		spPersonas.setBounds(10, 11, 764, 182);
 		panel.add(spPersonas);
 		
 		modelPersonas = new DefaultTableModel(null,nombreColumnas);
@@ -61,19 +65,19 @@ public class Vista
 		spPersonas.setViewportView(tablaPersonas);
 		
 		btnAgregar = new JButton("Agregar");
-		btnAgregar.setBounds(10, 228, 89, 23);
+		btnAgregar.setBounds(191, 228, 89, 23);
 		panel.add(btnAgregar);
 		
-		JButton btnEditar = new JButton("Editar");
-		btnEditar.setBounds(109, 228, 89, 23);
+		btnEditar = new JButton("Editar");
+		btnEditar.setBounds(290, 228, 89, 23);
 		panel.add(btnEditar);
 		
 		btnBorrar = new JButton("Borrar");
-		btnBorrar.setBounds(208, 228, 89, 23);
+		btnBorrar.setBounds(389, 228, 89, 23);
 		panel.add(btnBorrar);
 		
 		btnReporte = new JButton("Reporte");
-		btnReporte.setBounds(307, 228, 89, 23);
+		btnReporte.setBounds(488, 228, 89, 23);
 		panel.add(btnReporte);
 	}
 	
@@ -112,6 +116,11 @@ public class Vista
 		return btnReporte;
 	}
 	
+	public JButton getBtnEditar() 
+	{
+		return btnEditar;
+	}
+	
 	public DefaultTableModel getModelPersonas() 
 	{
 		return modelPersonas;
@@ -135,9 +144,23 @@ public class Vista
 
 		for (PersonaDTO p : personasEnTabla)
 		{
+			DireccionDTO d = p.getDireccion();
+			TipoContactoDTO t = p.getTipoContacto();
+
 			String nombre = p.getNombre();
 			String tel = p.getTelefono();
-			Object[] fila = {nombre, tel};
+			String email = p.getEmail();
+			String pais = d.getPais();
+			String prov = d.getProvincia();
+			String localidad = d.getLocalidad();
+			String calle = d.getCalle();
+			String altura = d.getAltura();
+			String piso = d.getPiso();
+			String depto = d.getDepartamento();
+			String fecha_nac = p.getFecha_nacimiento();
+			String tipo = t.getNombreTipoContacto();
+
+			Object[] fila = {nombre, tel, email,pais,prov,localidad,calle,altura,piso,depto,fecha_nac,tipo};
 			this.getModelPersonas().addRow(fila);
 		}
 		
