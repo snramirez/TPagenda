@@ -39,3 +39,45 @@ CREATE TABLE `personas` (
   CONSTRAINT `IdDireccion` FOREIGN KEY (`IdDireccion`) REFERENCES `direccion` (`iddireccion`),
   CONSTRAINT `IdTipo` FOREIGN KEY (`IdTipo`) REFERENCES `tipo_contacto` (`idtipo`)
 );
+
+INSERT INTO direccion(pais) VALUES ('Argentina');
+INSERT INTO direccion(pais) VALUES ('Brasil');
+INSERT INTO direccion(pais) VALUES ('Chile');
+INSERT INTO direccion(pais) VALUES ('Colombia');
+INSERT INTO direccion(pais) VALUES ('Ecuador');
+INSERT INTO direccion(pais) VALUES ('Francia');
+INSERT INTO direccion(pais) VALUES ('Hungria');
+INSERT INTO direccion(pais) VALUES ('Japon');
+INSERT INTO direccion(pais) VALUES ('Peru');
+INSERT INTO direccion(pais) VALUES ('Rusia');
+INSERT INTO direccion(pais) VALUES ('Uruguay');
+INSERT INTO direccion(pais) VALUES ('Venezuela');
+
+INSERT INTO direccion(provincia) VALUES ('Buenos Aires');
+INSERT INTO direccion(provincia) VALUES ('Catamarca');
+INSERT INTO direccion(provincia) VALUES ('Chubut');
+INSERT INTO direccion(provincia) VALUES ('Formosa');
+INSERT INTO direccion(provincia) VALUES ('La Pampa');
+INSERT INTO direccion(provincia) VALUES ('Misiones');
+INSERT INTO direccion(provincia) VALUES ('San Juan');
+INSERT INTO direccion(provincia) VALUES ('Santiago del Estero');
+INSERT INTO direccion(provincia) VALUES ('Tierra del Fuego');
+
+INSERT INTO direccion(localidad) VALUES ('Almirante Brown');
+INSERT INTO direccion(localidad) VALUES ('Bahia Blanca');
+INSERT INTO direccion(localidad) VALUES ('Don Torcuato');
+INSERT INTO direccion(localidad) VALUES ('Hurlingham');
+INSERT INTO direccion(localidad) VALUES ('Jose C. Paz');
+INSERT INTO direccion(localidad) VALUES ('Malvinas Argentinas');
+INSERT INTO direccion(localidad) VALUES ('Mar del Plata');
+INSERT INTO direccion(localidad) VALUES ('Olivos');
+INSERT INTO direccion(localidad) VALUES ('San Fernando');
+INSERT INTO direccion(localidad) VALUES ('San Isidro');
+INSERT INTO direccion(localidad) VALUES ('San Miguel');
+INSERT INTO direccion(localidad) VALUES ('Tres de Febrero');
+
+INSERT INTO tipo_contacto(Nombre_tipo) VALUES ('Amigo');
+INSERT INTO tipo_contacto(Nombre_tipo) VALUES ('Familia');
+INSERT INTO tipo_contacto(Nombre_tipo) VALUES ('Trabajo');
+
+
