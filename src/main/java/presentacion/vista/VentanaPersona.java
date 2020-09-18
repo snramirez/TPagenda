@@ -140,7 +140,7 @@ public class VentanaPersona extends JFrame
 		panel.add(lblCumpleaños);
 		
 		txtCumpleaños = new JTextField();
-		txtCumpleaños.setText("DD/MM");
+		txtCumpleaños.setText("AAAA/MM/DD");
 		txtCumpleaños.setToolTipText("");
 		txtCumpleaños.setBounds(94, 269, 86, 20);
 		panel.add(txtCumpleaños);
