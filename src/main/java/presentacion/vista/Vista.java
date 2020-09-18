@@ -11,10 +11,12 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import dto.DireccionDTO;
 import dto.PersonaDTO;
 
 import javax.swing.JButton;
 
+import dto.TipoContactoDTO;
 import persistencia.conexion.Conexion;
 
 public class Vista
@@ -136,9 +138,23 @@ public class Vista
 
 		for (PersonaDTO p : personasEnTabla)
 		{
+			DireccionDTO d = p.getDireccion();
+			TipoContactoDTO t = p.getTipoContacto();
+
 			String nombre = p.getNombre();
 			String tel = p.getTelefono();
-			Object[] fila = {nombre, tel};
+			String email = p.getEmail();
+			String pais = d.getPais();
+			String prov = d.getProvincia();
+			String localidad = d.getLocalidad();
+			String calle = d.getCalle();
+			String altura = d.getAltura();
+			String piso = d.getPiso();
+			String depto = d.getDepartamento();
+			String fecha_nac = p.getFecha_nacimiento();
+			String tipo = t.getNombreTipoContacto();
+
+			Object[] fila = {nombre, tel, email,pais,prov,localidad,calle,altura,piso,depto,fecha_nac,tipo};
 			this.getModelPersonas().addRow(fila);
 		}
 		
