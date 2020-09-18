@@ -34,6 +34,8 @@ public class Controlador implements ActionListener
 			this.ventanaPersona.mostrarVentana();
 			this.ventanaPersona.llenarTipos(this.agenda.obtenerTipoContactos());
 			this.ventanaPersona.llenarPais(this.agenda.obtenerDirecciones());
+			this.ventanaPersona.llenarProvincia(this.agenda.obtenerDirecciones());
+			this.ventanaPersona.llenarLocalidad(this.agenda.obtenerDirecciones());
 		}
 
 		private void guardarPersona(ActionEvent p) {

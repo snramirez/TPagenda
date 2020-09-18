@@ -196,6 +196,24 @@ public class VentanaPersona extends JFrame
 		}
 	}
 	
+	public void llenarProvincia(List<DireccionDTO> Direcciones) 
+	{	
+		this.comboProvincia.removeAllItems();
+		for (DireccionDTO p : Direcciones)
+		{
+			this.comboProvincia.addItem(p.getProvincia());
+		}
+	}
+	
+	public void llenarLocalidad(List<DireccionDTO> Direcciones) 
+	{	
+		this.comboLocalidad.removeAllItems();
+		for (DireccionDTO p : Direcciones)
+		{
+			this.comboLocalidad.addItem(p.getLocalidad());
+		}
+	}
+	
 	public void mostrarVentana()
 	{
 		this.setVisible(true);
