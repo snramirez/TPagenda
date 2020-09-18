@@ -22,6 +22,8 @@ public class DireccionDAOSQL implements DireccionDAO {
 			"SELECT * from direccion;";
 	private static final String update = 
 			"UPDATE direccion SET pais = ?, provincia = ?, localidad = ?, calle = ?, altura = ?, piso = ?, departamento = ? WHERE iddireccion = ?";
+	private static final String lastInsert = 
+			"SELECT * FROM direccion WHERE iddireccion = (SELECT MAX(iddireccion) FROM direccion)";
 
 	@Override
 	public boolean insert(DireccionDTO direccion) {
@@ -135,6 +137,28 @@ public class DireccionDAOSQL implements DireccionDAO {
 				direccion.add(getDireccionDTO(resultSet));
 			}
 		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+		return direccion;
+	}
+	
+	public DireccionDTO lastInsert()
+	{
+		PreparedStatement statement;
+		ResultSet resultSet;
+		Conexion conexion = Conexion.getConexion();
+		DireccionDTO direccion = null;
+		try
+		{
+			statement = conexion.getSQLConexion().prepareStatement(lastInsert);
+			resultSet = statement.executeQuery();
+			if(resultSet.next())
+			{
+				direccion = getDireccionDTO(resultSet);
+			}
+		}
 		catch (SQLException e) 
 		{
 			e.printStackTrace();

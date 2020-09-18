@@ -61,9 +61,11 @@ public class Controlador implements ActionListener
 			System.out.println(piso);
 			System.out.println(depto);
 			
-			PersonaDTO nuevaPersona = new PersonaDTO(0, nombre, tel, email,null,direccion,tipo);
+			
 			this.agenda.agregarDireccion(direccion);
 			this.agenda.agregarTipoContacto(tipo);
+			DireccionDTO ultimaDir = this.agenda.ultimaDireccion();
+			PersonaDTO nuevaPersona = new PersonaDTO(0, nombre, tel, email,null,ultimaDir,ventanaPersona.getTipo());
 			this.agenda.agregarPersona(nuevaPersona);
 			this.refrescarTabla();
 			this.ventanaPersona.cerrar();

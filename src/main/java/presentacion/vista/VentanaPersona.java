@@ -173,6 +173,11 @@ public class VentanaPersona extends JFrame
 		this.setVisible(false);
 	}
 	
+	public TipoContactoDTO getTipo() 
+	{
+		return (TipoContactoDTO) comboTipo.getSelectedItem();
+	}
+	
 	public void llenarTipos(List<TipoContactoDTO> Tipos) 
 	{	
 		this.comboTipo.removeAllItems();

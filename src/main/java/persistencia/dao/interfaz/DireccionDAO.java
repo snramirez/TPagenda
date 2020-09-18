@@ -11,5 +11,7 @@ public interface DireccionDAO {
 	public boolean update (DireccionDTO direccion_a_editar);
 	
 	public List<DireccionDTO> readAll(); 
+	
+	public DireccionDTO lastInsert();
 
 }

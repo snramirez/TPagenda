@@ -40,12 +40,18 @@ public class Agenda
 		return this.persona.readAll();		
 	}
 
-	public void agregarDireccion(DireccionDTO direccion) {
+	public void agregarDireccion(DireccionDTO direccion) 
+	{
 		this.dir.insert(direccion);
 	}
 	
-	public List<DireccionDTO> obtenerDirecciones () {
+	public List<DireccionDTO> obtenerDirecciones () 
+	{
 		return this.dir.readAll();
+	}
+	
+	public DireccionDTO ultimaDireccion() {
+		return this.dir.lastInsert();
 	}
 
 	public void agregarTipoContacto(TipoContactoDTO tipo) {
