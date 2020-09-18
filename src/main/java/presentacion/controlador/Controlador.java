@@ -59,7 +59,7 @@ public class Controlador implements ActionListener
 			
 			this.agenda.agregarDireccion(direccion);
 			DireccionDTO ultimaDir = this.agenda.ultimaDireccion();
-			PersonaDTO nuevaPersona = new PersonaDTO(id, nombre, tel, email,null,ultimaDir,ventanaEditarPersona.getTipo());
+			PersonaDTO nuevaPersona = new PersonaDTO(id, nombre, tel, email,fecha_nacimiento,ultimaDir,ventanaEditarPersona.getTipo());
 			this.agenda.editarPersona(nuevaPersona);
 			this.refrescarTabla();
 			this.ventanaEditarPersona.cerrar();
@@ -88,6 +88,7 @@ public class Controlador implements ActionListener
 				this.ventanaEditarPersona.getTxtCalle().setText(this.personasEnTabla.get(filasSeleccionadas[0]).getDireccion().getCalle());
 				this.ventanaEditarPersona.getTxtDepto().setText(this.personasEnTabla.get(filasSeleccionadas[0]).getDireccion().getDepartamento());
 				this.ventanaEditarPersona.getTxtEmail().setText(this.personasEnTabla.get(filasSeleccionadas[0]).getEmail());
+				this.ventanaEditarPersona.getTxtCumpleaños().setText(this.personasEnTabla.get(filasSeleccionadas[0]).getFecha_nacimiento());
 				this.ventanaEditarPersona.getTxtPiso().setText(this.personasEnTabla.get(filasSeleccionadas[0]).getDireccion().getPiso());
 				this.ventanaEditarPersona.getPais().setSelectedItem(this.personasEnTabla.get(filasSeleccionadas[0]).getDireccion().getPais());
 				this.ventanaEditarPersona.getProvincia().setSelectedItem(this.personasEnTabla.get(filasSeleccionadas[0]).getDireccion().getProvincia());
