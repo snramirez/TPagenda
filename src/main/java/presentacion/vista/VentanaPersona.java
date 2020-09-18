@@ -4,6 +4,7 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.HashSet;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -241,36 +242,48 @@ public class VentanaPersona extends JFrame
 	public void llenarTipos(List<TipoContactoDTO> Tipos) 
 	{	
 		this.comboTipo.removeAllItems();
+		HashSet<String> set = new HashSet<>();
 		for (TipoContactoDTO p : Tipos)
 		{
-			this.comboTipo.addItem(p);
+			if(!set.contains(p.getNombreTipoContacto()))
+				this.comboTipo.addItem(p);
+			set.add(p.getNombreTipoContacto());
 		}
 	}
 	
 	public void llenarPais(List<DireccionDTO> Direcciones) 
 	{	
 		this.comboPais.removeAllItems();
+		HashSet<String> set = new HashSet<>();
 		for (DireccionDTO p : Direcciones)
 		{
-			this.comboPais.addItem(p.getPais());
+			if(!set.contains(p.getPais()))
+				this.comboPais.addItem(p.getPais());
+			set.add(p.getPais());
 		}
 	}
 	
 	public void llenarProvincia(List<DireccionDTO> Direcciones) 
 	{	
 		this.comboProvincia.removeAllItems();
+		HashSet<String> set = new HashSet<>();
 		for (DireccionDTO p : Direcciones)
 		{
-			this.comboProvincia.addItem(p.getProvincia());
+			if(!set.contains(p.getProvincia()))
+				this.comboProvincia.addItem(p.getProvincia());
+			set.add(p.getProvincia());
 		}
 	}
 	
 	public void llenarLocalidad(List<DireccionDTO> Direcciones) 
 	{	
 		this.comboLocalidad.removeAllItems();
+		HashSet<String> set = new HashSet<>();
 		for (DireccionDTO p : Direcciones)
 		{
-			this.comboLocalidad.addItem(p.getLocalidad());
+			if(!set.contains(p.getLocalidad()))
+				this.comboLocalidad.addItem(p.getLocalidad());
+			set.add(p.getLocalidad());
 		}
 	}
 	
