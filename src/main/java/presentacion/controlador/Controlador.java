@@ -4,6 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+import dto.DireccionDTO;
+import dto.TipoContactoDTO;
 import modelo.Agenda;
 import presentacion.reportes.ReporteAgenda;
 import presentacion.vista.VentanaPersona;
@@ -33,9 +35,25 @@ public class Controlador implements ActionListener
 		}
 
 		private void guardarPersona(ActionEvent p) {
+			String pais = (ventanaPersona.getPais().getSelectedItem() != null)? ventanaPersona.getPais().getSelectedItem().toString():"";
+			String provincia = (ventanaPersona.getProvincia().getSelectedItem() != null)? ventanaPersona.getProvincia().getSelectedItem().toString():"";
+			String localidad = (ventanaPersona.getLocalidad().getSelectedItem() != null)? ventanaPersona.getLocalidad().getSelectedItem().toString():"";
+			String calle = ventanaPersona.getTxtCalle().toString();
+			String altura = ventanaPersona.getTxtAltura().toString();
+			String piso = ventanaPersona.getTxtPiso().toString();
+			String depto = ventanaPersona.getTxtDepto().toString();
+			DireccionDTO direccion = new DireccionDTO(0,pais, provincia, localidad, calle, altura, piso, depto);
+
+			String stringTipo = (ventanaPersona.getTipoContacto().getSelectedItem() != null)? ventanaPersona.getTipoContacto().getSelectedItem().toString():"";
+			TipoContactoDTO tipo = new TipoContactoDTO(0,stringTipo);
+
 			String nombre = this.ventanaPersona.getTxtNombre().getText();
 			String tel = ventanaPersona.getTxtTelefono().getText();
-			PersonaDTO nuevaPersona = new PersonaDTO(0, nombre, tel);
+			String email = ventanaPersona.getTxtEmail().getText();
+			String fecha_nacimiento = ventanaPersona.getTxtCumpleaños().getText();
+			PersonaDTO nuevaPersona = new PersonaDTO(0, nombre, tel, email,"",direccion,tipo);
+			this.agenda.agregarDireccion(direccion);
+			this.agenda.agregarTipoContacto(tipo);
 			this.agenda.agregarPersona(nuevaPersona);
 			this.refrescarTabla();
 			this.ventanaPersona.cerrar();
