@@ -1,11 +1,17 @@
 package presentacion.vista;
 
+import java.util.List;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+
+import dto.DireccionDTO;
+import dto.TipoContactoDTO;
+
 import javax.swing.JComboBox;
 
 public class VentanaPersona extends JFrame 
@@ -22,7 +28,7 @@ public class VentanaPersona extends JFrame
 	private JTextField txtDepto;
 	private JTextField txtEmail;
 	private JTextField txtCumpleaños;
-	private JComboBox<String> comboTipo;
+	private JComboBox<TipoContactoDTO> comboTipo;
 	private JComboBox<String> comboProvincia;
 	private JComboBox<String> comboPais;
 	private JComboBox<String> comboLocalidad;
@@ -144,7 +150,7 @@ public class VentanaPersona extends JFrame
 		lblTipo.setBounds(195, 272, 46, 14);
 		panel.add(lblTipo);
 		
-		comboTipo = new JComboBox();
+		comboTipo = new JComboBox<TipoContactoDTO>();
 		comboTipo.setBounds(234, 269, 117, 20);
 		panel.add(comboTipo);
 		
@@ -152,7 +158,7 @@ public class VentanaPersona extends JFrame
 		lblPais.setBounds(10, 133, 46, 14);
 		panel.add(lblPais);
 		
-		comboPais = new JComboBox();
+		comboPais = new JComboBox<>();
 		comboPais.setBounds(49, 130, 117, 20);
 		panel.add(comboPais);
 		
@@ -165,6 +171,24 @@ public class VentanaPersona extends JFrame
 		panel.add(comboProvincia);
 		
 		this.setVisible(false);
+	}
+	
+	public void llenarTipos(List<TipoContactoDTO> Tipos) 
+	{	
+		this.comboTipo.removeAllItems();
+		for (TipoContactoDTO p : Tipos)
+		{
+			this.comboTipo.addItem(p);
+		}
+	}
+	
+	public void llenarPais(List<DireccionDTO> Direcciones) 
+	{	
+		this.comboPais.removeAllItems();
+		for (DireccionDTO p : Direcciones)
+		{
+			this.comboPais.addItem(p.getPais());
+		}
 	}
 	
 	public void mostrarVentana()

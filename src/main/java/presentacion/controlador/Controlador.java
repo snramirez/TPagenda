@@ -32,16 +32,18 @@ public class Controlador implements ActionListener
 		
 		private void ventanaAgregarPersona(ActionEvent a) {
 			this.ventanaPersona.mostrarVentana();
+			this.ventanaPersona.llenarTipos(this.agenda.obtenerTipoContactos());
+			this.ventanaPersona.llenarPais(this.agenda.obtenerDirecciones());
 		}
 
 		private void guardarPersona(ActionEvent p) {
 			String pais = (ventanaPersona.getPais().getSelectedItem() != null)? ventanaPersona.getPais().getSelectedItem().toString():"";
 			String provincia = (ventanaPersona.getProvincia().getSelectedItem() != null)? ventanaPersona.getProvincia().getSelectedItem().toString():"";
 			String localidad = (ventanaPersona.getLocalidad().getSelectedItem() != null)? ventanaPersona.getLocalidad().getSelectedItem().toString():"";
-			String calle = ventanaPersona.getTxtCalle().toString();
-			String altura = ventanaPersona.getTxtAltura().toString();
-			String piso = ventanaPersona.getTxtPiso().toString();
-			String depto = ventanaPersona.getTxtDepto().toString();
+			String calle = ventanaPersona.getTxtCalle().getText();
+			String altura = ventanaPersona.getTxtAltura().getText();
+			String piso = ventanaPersona.getTxtPiso().getText();
+			String depto = ventanaPersona.getTxtDepto().getText();
 			DireccionDTO direccion = new DireccionDTO(0,pais, provincia, localidad, calle, altura, piso, depto);
 
 			String stringTipo = (ventanaPersona.getTipoContacto().getSelectedItem() != null)? ventanaPersona.getTipoContacto().getSelectedItem().toString():"";
@@ -51,7 +53,15 @@ public class Controlador implements ActionListener
 			String tel = ventanaPersona.getTxtTelefono().getText();
 			String email = ventanaPersona.getTxtEmail().getText();
 			String fecha_nacimiento = ventanaPersona.getTxtCumpleaños().getText();
-			PersonaDTO nuevaPersona = new PersonaDTO(0, nombre, tel, email,"",direccion,tipo);
+			System.out.println(pais);
+			System.out.println(provincia);
+			System.out.println(localidad);
+			System.out.println(calle);
+			System.out.println(altura);
+			System.out.println(piso);
+			System.out.println(depto);
+			
+			PersonaDTO nuevaPersona = new PersonaDTO(0, nombre, tel, email,null,direccion,tipo);
 			this.agenda.agregarDireccion(direccion);
 			this.agenda.agregarTipoContacto(tipo);
 			this.agenda.agregarPersona(nuevaPersona);
