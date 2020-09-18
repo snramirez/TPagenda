@@ -1,10 +1,17 @@
 package presentacion.vista;
 
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
@@ -74,6 +81,20 @@ public class VentanaPersona extends JFrame
 		txtNombre.setColumns(10);
 		
 		txtTelefono = new JTextField();
+		txtTelefono.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent key) {
+				char letra = key.getKeyChar();
+				//checkea que no sea un numero
+				if(letra < '0' || letra > '9') {
+					//checkea que no sea borrar o escape
+					if(!((int)key.getKeyChar() == 27 || (int)key.getKeyChar() == 8)) {
+						key.consume();
+						JOptionPane.showMessageDialog(rootPane,"Solo numeros");
+					}
+				}
+			}
+		});
 		txtTelefono.setBounds(79, 49, 218, 20);
 		panel.add(txtTelefono);
 		txtTelefono.setColumns(10);
@@ -96,6 +117,20 @@ public class VentanaPersona extends JFrame
 		panel.add(lblAltura);
 		
 		txtAltura = new JTextField();
+		txtAltura.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent key) {
+				char letra = key.getKeyChar();
+				//checkea que no sea un numero
+				if(letra < '0' || letra > '9') {
+					//checkea que no sea borrar o escape
+					if(!((int)key.getKeyChar() == 27 || (int)key.getKeyChar() == 8)) {
+						key.consume();
+						JOptionPane.showMessageDialog(rootPane,"Solo numeros");
+					}
+				}
+			}
+		});
 		txtAltura.setBounds(52, 238, 58, 20);
 		panel.add(txtAltura);
 		txtAltura.setColumns(10);
@@ -105,6 +140,20 @@ public class VentanaPersona extends JFrame
 		panel.add(lblPiso);
 		
 		txtPiso = new JTextField();
+		txtPiso.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent key) {
+				char letra = key.getKeyChar();
+				//checkea que no sea un numero
+				if(letra < '0' || letra > '9') {
+					//checkea que no sea borrar o escape
+					if(!((int)key.getKeyChar() == 27 || (int)key.getKeyChar() == 8)) {
+						key.consume();
+						JOptionPane.showMessageDialog(rootPane,"Solo numeros");
+					}
+				}
+			}
+		});
 		txtPiso.setBounds(153, 238, 46, 20);
 		panel.add(txtPiso);
 		txtPiso.setColumns(10);
@@ -131,6 +180,17 @@ public class VentanaPersona extends JFrame
 		panel.add(lblEmail);
 		
 		txtEmail = new JTextField();
+		txtEmail.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent event) {
+				String email = txtEmail.getText().toString();
+				Pattern patron = Pattern.compile("^[\\w-]+(\\.[\\w-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+				Matcher mat = patron.matcher(email);
+				if(!mat.find()) {
+					JOptionPane.showMessageDialog(rootPane, "Formato de email invalido ej 'nombre@compania.com'");
+				}
+			}
+		});
 		txtEmail.setBounds(66, 88, 177, 20);
 		panel.add(txtEmail);
 		txtEmail.setColumns(10);
