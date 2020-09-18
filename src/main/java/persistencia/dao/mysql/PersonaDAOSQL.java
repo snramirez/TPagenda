@@ -22,7 +22,7 @@ public class PersonaDAOSQL implements PersonaDAO
 	private static final String readall = 
 			"SELECT idPersona, Nombre, Telefono, Email, Fecha_nacimiento, personas.IdDireccion, pais, provincia, localidad, calle, altura, piso, departamento, personas.IdTipo,  Nombre_tipo FROM personas LEFT JOIN direccion ON personas.iddireccion = direccion.iddireccion LEFT JOIN tipo_contacto ON personas.IdTipo = tipo_contacto.idtipo";
 	private static final String update = 
-			"UPDATE personas SET nombre = ? , telefono = ? , email = ? , FechaNacimiento = ? , IdDireccion = ?, IdTipo = ? WHERE idPersona = ?";
+			"UPDATE personas SET nombre = ? , telefono = ? , email = ? , Fecha_nacimiento = ? , IdDireccion = ?, IdTipo = ? WHERE idPersona = ?";
 	
 	public boolean insert(PersonaDTO persona)
 	{
@@ -118,6 +118,9 @@ public class PersonaDAOSQL implements PersonaDAO
 			statement.setInt(6, persona_a_editar.getTipoContacto().getIdTipoContacto());
 			
 			statement.setInt(7, persona_a_editar.getIdPersona());
+			System.out.print(persona_a_editar.getDireccion().getIdDireccion());
+			System.out.print(persona_a_editar.getTipoContacto().getIdTipoContacto());
+			System.out.print(persona_a_editar.getIdPersona());
 			if(statement.executeUpdate() > 0)
 			{
 				conexion.commit();
