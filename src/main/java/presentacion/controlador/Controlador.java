@@ -9,7 +9,9 @@ import javax.swing.JOptionPane;
 import dto.DireccionDTO;
 import dto.TipoContactoDTO;
 import modelo.Agenda;
+import persistencia.conexion.Conexion;
 import presentacion.reportes.ReporteAgenda;
+import presentacion.vista.Login;
 import presentacion.vista.VentanaEditarPersona;
 import presentacion.vista.VentanaPersona;
 import presentacion.vista.Vista;
@@ -17,6 +19,7 @@ import dto.PersonaDTO;
 
 public class Controlador implements ActionListener
 {
+		private Login login;
 		private Vista vista;
 		private List<PersonaDTO> personasEnTabla;
 		private VentanaPersona ventanaPersona;
@@ -25,6 +28,8 @@ public class Controlador implements ActionListener
 		
 		public Controlador(Vista vista, Agenda agenda)
 		{
+			this.login = Login.getInstance();
+			this.login.getBtnIngresar().addActionListener(i -> validarDatos(i));
 			this.vista = vista;
 			this.vista.getBtnAgregar().addActionListener(a->ventanaAgregarPersona(a));
 			this.vista.getBtnEditar().addActionListener(b->ventanaEditarPersona(b));
@@ -35,6 +40,14 @@ public class Controlador implements ActionListener
 			this.ventanaEditarPersona = VentanaEditarPersona.getInstance();
 			this.ventanaEditarPersona.getBtnEditarPersona().addActionListener(c->editarPersona(c));
 			this.agenda = agenda;
+		}
+			
+		private void validarDatos(ActionEvent i) {
+			if (Conexion.verificarCredenciales(this.login.getUsername().getText(),String.valueOf(this.login.getPassword().getPassword()))){
+				this.refrescarTabla();
+				this.vista.show();
+				this.login.dispose();
+			}
 		}
 		
 		private void editarPersona(ActionEvent c) {
@@ -148,8 +161,7 @@ public class Controlador implements ActionListener
 		
 		public void inicializar()
 		{
-			this.refrescarTabla();
-			this.vista.show();
+			this.login.mostrarVentana();
 		}
 		
 		private void refrescarTabla()
