@@ -10,7 +10,6 @@ import java.util.List;
 import dto.LocalidadDTO;
 import dto.PaisDTO;
 import dto.ProvinciaDTO;
-import dto.TipoContactoDTO;
 import persistencia.conexion.Conexion;
 import persistencia.dao.interfaz.PaisProvLocDAO;
 
@@ -256,7 +255,7 @@ public class PaisProvLocDAOSQL implements PaisProvLocDAO{
 		boolean isUpdateExitoso = false;
 		try
 		{
-			statement = conexion.prepareStatement(updateProvincia);
+			statement = conexion.prepareStatement(updateLocalidad);
 			statement.setString(1, localidad_a_editar.getNombreLocalidad());
 			statement.setInt(2, localidad_a_editar.getIdLocalidad());
 			if(statement.executeUpdate() > 0)
