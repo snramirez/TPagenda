@@ -6,16 +6,18 @@ public class DireccionDTO {
 	private String pais;
 	private String provincia;
 	private String localidad;
+	private String codigoPostal;
 	private String calle;
 	private String altura;
 	private String piso;
 	private String departamento;
 	
-	public DireccionDTO (int idDireccion, String pais, String provincia, String localidad, String calle, String altura, String piso, String departamento) {
+	public DireccionDTO (int idDireccion, String pais, String provincia, String localidad,String codigoPostal, String calle, String altura, String piso, String departamento) {
 		this.idDireccion = idDireccion;
 		this.pais = pais;
 		this.provincia = provincia;
 		this.localidad = localidad;
+		this.codigoPostal = codigoPostal;
 		this.calle = calle;
 		this.altura = altura;
 		this.piso = piso;
@@ -85,6 +87,14 @@ public class DireccionDTO {
 
 	public void setDepartamento(String departamento) {
 		this.departamento = departamento;
+	}
+
+	public String getCodigoPostal() {
+		return codigoPostal;
+	}
+
+	public void setCodigoPostal(String codigoPostal) {
+		this.codigoPostal = codigoPostal;
 	}
 	
 	@Override

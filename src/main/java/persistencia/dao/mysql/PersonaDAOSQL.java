@@ -16,13 +16,13 @@ import dto.TipoContactoDTO;
 public class PersonaDAOSQL implements PersonaDAO
 {
 	private static final String insert = 
-			"INSERT INTO personas(idPersona, nombre, telefono, Email, Fecha_nacimiento, IdDireccion, IdTipo) VALUES(?, ?, ?, ?, ?, ?, ?)";
+			"INSERT INTO personas(idPersona, nombre, telefono, Email,userLinkedin, Fecha_nacimiento, IdDireccion, IdTipo) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String delete = 
 			"DELETE FROM personas WHERE idPersona = ?";
 	private static final String readall = 
-			"SELECT idPersona, Nombre, Telefono, Email, Fecha_nacimiento, personas.IdDireccion, pais, provincia, localidad, calle, altura, piso, departamento, personas.IdTipo,  Nombre_tipo FROM personas LEFT JOIN direccion ON personas.iddireccion = direccion.iddireccion LEFT JOIN tipo_contacto ON personas.IdTipo = tipo_contacto.idtipo";
+			"SELECT idPersona, Nombre, Telefono, Email, userLinkedin, Fecha_nacimiento, personas.IdDireccion, pais, provincia, localidad,codigoPostal, calle, altura, piso, departamento, personas.IdTipo,  Nombre_tipo FROM personas LEFT JOIN direccion ON personas.iddireccion = direccion.iddireccion LEFT JOIN tipo_contacto ON personas.IdTipo = tipo_contacto.idtipo";
 	private static final String update = 
-			"UPDATE personas SET nombre = ? , telefono = ? , email = ? , Fecha_nacimiento = ? , IdDireccion = ?, IdTipo = ? WHERE idPersona = ?";
+			"UPDATE personas SET nombre = ? , telefono = ? , email = ? ,userLinkedin = ?, Fecha_nacimiento = ? , IdDireccion = ?, IdTipo = ? WHERE idPersona = ?";
 	
 	public boolean insert(PersonaDTO persona)
 	{
@@ -36,9 +36,10 @@ public class PersonaDAOSQL implements PersonaDAO
 			statement.setString(2, persona.getNombre());
 			statement.setString(3, persona.getTelefono());
 			statement.setString(4, persona.getEmail());
-			statement.setString(5, persona.getFecha_nacimiento());
-			statement.setInt(6, persona.getDireccion().getIdDireccion());
-			statement.setInt(7, persona.getTipoContacto().getIdTipoContacto());
+			statement.setString(5, persona.getUserLinkedin());
+			statement.setString(6, persona.getFecha_nacimiento());
+			statement.setInt(7, persona.getDireccion().getIdDireccion());
+			statement.setInt(8, persona.getTipoContacto().getIdTipoContacto());
 			if(statement.executeUpdate() > 0)
 			{
 				conexion.commit();
@@ -113,11 +114,11 @@ public class PersonaDAOSQL implements PersonaDAO
 			statement.setString(1, persona_a_editar.getNombre());
 			statement.setString(2, persona_a_editar.getTelefono());
 			statement.setString(3, persona_a_editar.getEmail());
-			statement.setString(4, persona_a_editar.getFecha_nacimiento());
-			statement.setInt(5, persona_a_editar.getDireccion().getIdDireccion());
-			statement.setInt(6, persona_a_editar.getTipoContacto().getIdTipoContacto());
-			
-			statement.setInt(7, persona_a_editar.getIdPersona());
+			statement.setString(4, persona_a_editar.getUserLinkedin());
+			statement.setString(5, persona_a_editar.getFecha_nacimiento());
+			statement.setInt(6, persona_a_editar.getDireccion().getIdDireccion());
+			statement.setInt(7, persona_a_editar.getTipoContacto().getIdTipoContacto());
+			statement.setInt(8, persona_a_editar.getIdPersona());
 			if(statement.executeUpdate() > 0)
 			{
 				conexion.commit();
@@ -143,12 +144,14 @@ public class PersonaDAOSQL implements PersonaDAO
 		String nombre = resultSet.getString("Nombre");
 		String tel = resultSet.getString("Telefono");
 		String email = resultSet.getString("Email");
+		String userLinkedin = resultSet.getString("userLinkedin");
 		String fechaNacimiento = resultSet.getString("Fecha_nacimiento");
 		DireccionDTO direccion = new DireccionDTO(
 				resultSet.getInt("IdDireccion"), 
 				resultSet.getString("pais"), 
 				resultSet.getString("provincia"), 
-				resultSet.getString("localidad"), 
+				resultSet.getString("localidad"),
+				resultSet.getString("codigoPostal"),
 				resultSet.getString("calle"), 
 				resultSet.getString("altura"), 
 				resultSet.getString("piso"), 
@@ -157,7 +160,7 @@ public class PersonaDAOSQL implements PersonaDAO
 				resultSet.getInt("idtipo"),
 				resultSet.getString("Nombre_tipo"));
 		
-		return new PersonaDTO(id, nombre, tel, email, fechaNacimiento, direccion, tipoContacto);
+		return new PersonaDTO(id, nombre, tel, email, userLinkedin, fechaNacimiento, direccion, tipoContacto);
 	}
 
 	

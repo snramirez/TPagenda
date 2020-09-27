@@ -57,22 +57,24 @@ public class Controlador implements ActionListener
 			String pais = (ventanaEditarPersona.getPais().getSelectedItem() != null)? ventanaEditarPersona.getPais().getSelectedItem().toString():"";
 			String provincia = (ventanaEditarPersona.getProvincia().getSelectedItem() != null)? ventanaEditarPersona.getProvincia().getSelectedItem().toString():"";
 			String localidad = (ventanaEditarPersona.getLocalidad().getSelectedItem() != null)? ventanaEditarPersona.getLocalidad().getSelectedItem().toString():"";
+			String codigoPostal = ventanaEditarPersona.getCodigoPostal().getText();
 			String calle = ventanaEditarPersona.getTxtCalle().getText();
 			String altura = ventanaEditarPersona.getTxtAltura().getText();
 			String piso = ventanaEditarPersona.getTxtPiso().getText();
 			String depto = ventanaEditarPersona.getTxtDepto().getText();
-			DireccionDTO direccion = new DireccionDTO(0,pais, provincia, localidad, calle, altura, piso, depto);
+			DireccionDTO direccion = new DireccionDTO(0,pais, provincia, localidad, codigoPostal, calle, altura, piso, depto);
 
 			TipoContactoDTO tipo = (TipoContactoDTO) ventanaEditarPersona.getTipoContacto().getSelectedItem();
 
 			String nombre = this.ventanaEditarPersona.getTxtNombre().getText();
 			String tel = ventanaEditarPersona.getTxtTelefono().getText();
 			String email = ventanaEditarPersona.getTxtEmail().getText();
+			String userLinkedin = ventanaEditarPersona.getLinkedin().getText();
 			String fecha_nacimiento = ventanaEditarPersona.getTxtCumpleaños().getText();			
 			
 			this.agenda.agregarDireccion(direccion);
 			DireccionDTO ultimaDir = this.agenda.ultimaDireccion();
-			PersonaDTO nuevaPersona = new PersonaDTO(id, nombre, tel, email,fecha_nacimiento,ultimaDir,ventanaEditarPersona.getTipo());
+			PersonaDTO nuevaPersona = new PersonaDTO(id, nombre, tel, email,userLinkedin,fecha_nacimiento,ultimaDir,ventanaEditarPersona.getTipo());
 			this.agenda.editarPersona(nuevaPersona);
 			this.refrescarTabla();
 			this.ventanaEditarPersona.cerrar();
@@ -93,7 +95,7 @@ public class Controlador implements ActionListener
 			}
 			else 
 			{
-				
+
 				this.ventanaEditarPersona.mostrarVentana();
 				this.ventanaEditarPersona.getTxtNombre().setText(this.personasEnTabla.get(filasSeleccionadas[0]).getNombre());
 				this.ventanaEditarPersona.getTxtTelefono().setText(this.personasEnTabla.get(filasSeleccionadas[0]).getTelefono());
@@ -106,6 +108,8 @@ public class Controlador implements ActionListener
 				this.ventanaEditarPersona.getPais().setSelectedItem(this.personasEnTabla.get(filasSeleccionadas[0]).getDireccion().getPais());
 				this.ventanaEditarPersona.getProvincia().setSelectedItem(this.personasEnTabla.get(filasSeleccionadas[0]).getDireccion().getProvincia());
 				this.ventanaEditarPersona.getLocalidad().setSelectedItem(this.personasEnTabla.get(filasSeleccionadas[0]).getDireccion().getLocalidad());
+				this.ventanaEditarPersona.getCodigoPostal().setText(this.personasEnTabla.get(filasSeleccionadas[0]).getDireccion().getCodigoPostal());
+				this.ventanaEditarPersona.getLinkedin().setText(this.personasEnTabla.get(filasSeleccionadas[0]).getUserLinkedin());
 				this.ventanaEditarPersona.getTipoContacto().setSelectedItem(this.personasEnTabla.get(filasSeleccionadas[0]).getTipoContacto());
 			}
 		}
@@ -122,22 +126,24 @@ public class Controlador implements ActionListener
 			String pais = (ventanaPersona.getPais().getSelectedItem() != null)? ventanaPersona.getPais().getSelectedItem().toString():"";
 			String provincia = (ventanaPersona.getProvincia().getSelectedItem() != null)? ventanaPersona.getProvincia().getSelectedItem().toString():"";
 			String localidad = (ventanaPersona.getLocalidad().getSelectedItem() != null)? ventanaPersona.getLocalidad().getSelectedItem().toString():"";
+			String codigoPostal = ventanaPersona.getCodigoPostal().getText();
 			String calle = ventanaPersona.getTxtCalle().getText();
 			String altura = ventanaPersona.getTxtAltura().getText();
 			String piso = ventanaPersona.getTxtPiso().getText();
 			String depto = ventanaPersona.getTxtDepto().getText();
-			DireccionDTO direccion = new DireccionDTO(0,pais, provincia, localidad, calle, altura, piso, depto);
+			DireccionDTO direccion = new DireccionDTO(0,pais, provincia, localidad,codigoPostal, calle, altura, piso, depto);
 
 			TipoContactoDTO tipo = (TipoContactoDTO) ventanaPersona.getTipoContacto().getSelectedItem();
 
 			String nombre = this.ventanaPersona.getTxtNombre().getText();
 			String tel = ventanaPersona.getTxtTelefono().getText();
 			String email = ventanaPersona.getTxtEmail().getText();
+			String userLinkedin = ventanaPersona.getLinkedin().getText();
 			String fecha_nacimiento = ventanaPersona.getTxtCumpleaños().getText();			
 			
 			this.agenda.agregarDireccion(direccion);
 			DireccionDTO ultimaDir = this.agenda.ultimaDireccion();
-			PersonaDTO nuevaPersona = new PersonaDTO(0, nombre, tel, email,fecha_nacimiento,ultimaDir,ventanaPersona.getTipo());
+			PersonaDTO nuevaPersona = new PersonaDTO(0, nombre, tel, email,userLinkedin, fecha_nacimiento,ultimaDir,ventanaPersona.getTipo());
 			this.agenda.agregarPersona(nuevaPersona);
 			this.refrescarTabla();
 			this.ventanaPersona.cerrar();
