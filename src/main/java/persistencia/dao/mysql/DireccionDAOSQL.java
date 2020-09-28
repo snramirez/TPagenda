@@ -15,13 +15,13 @@ import persistencia.dao.interfaz.DireccionDAO;
 public class DireccionDAOSQL implements DireccionDAO {
 	
 	private static final String insert = 
-			"INSERT INTO direccion(iddireccion, pais, provincia, localidad, calle, altura, piso, departamento) VALUES (?,?,?,?,?,?,?,?)";
+			"INSERT INTO direccion(iddireccion, pais, provincia, localidad, codigoPostal, calle, altura, piso, departamento) VALUES (?,?,?,?,?,?,?,?,?)";
 	private static final String delete = 
 			"DELETE FROM direccion WHERE iddireccion = ?";
 	private static final String readall = 
 			"SELECT * from direccion;";
 	private static final String update = 
-			"UPDATE direccion SET pais = ?, provincia = ?, localidad = ?, calle = ?, altura = ?, piso = ?, departamento = ? WHERE iddireccion = ?";
+			"UPDATE direccion SET pais = ?, provincia = ?, localidad = ?, codigoPostal = ?, calle = ?, altura = ?, piso = ?, departamento = ? WHERE iddireccion = ?";
 	private static final String lastInsert = 
 			"SELECT * FROM direccion WHERE iddireccion = (SELECT MAX(iddireccion) FROM direccion)";
 
@@ -37,10 +37,11 @@ public class DireccionDAOSQL implements DireccionDAO {
 			statement.setString(2, direccion.getPais());
 			statement.setString(3, direccion.getProvincia());
 			statement.setString(4, direccion.getLocalidad());
-			statement.setString(5, direccion.getCalle());
-			statement.setString(6, direccion.getAltura());
-			statement.setString(7, direccion.getPiso());
-			statement.setString(8, direccion.getDepartamento());
+			statement.setString(5, direccion.getCodigoPostal());
+			statement.setString(6, direccion.getCalle());
+			statement.setString(7, direccion.getAltura());
+			statement.setString(8, direccion.getPiso());
+			statement.setString(9, direccion.getDepartamento());
 			if(statement.executeUpdate() > 0)
 			{
 				conexion.commit();
@@ -96,12 +97,12 @@ public class DireccionDAOSQL implements DireccionDAO {
 			statement.setString(1, direccion_a_editar.getPais());
 			statement.setString(2, direccion_a_editar.getProvincia());
 			statement.setString(3, direccion_a_editar.getLocalidad());
-			statement.setString(4, direccion_a_editar.getCalle());
-			statement.setString(5, direccion_a_editar.getAltura());
-			statement.setString(6, direccion_a_editar.getPiso());
-			statement.setString(7, direccion_a_editar.getDepartamento());
-			
-			statement.setInt(8, direccion_a_editar.getIdDireccion());
+			statement.setString(4, direccion_a_editar.getCodigoPostal());
+			statement.setString(5, direccion_a_editar.getCalle());
+			statement.setString(6, direccion_a_editar.getAltura());
+			statement.setString(7, direccion_a_editar.getPiso());
+			statement.setString(8, direccion_a_editar.getDepartamento());
+			statement.setInt(9, direccion_a_editar.getIdDireccion());
 			if(statement.executeUpdate() > 0)
 			{
 				conexion.commit();
@@ -171,13 +172,14 @@ public class DireccionDAOSQL implements DireccionDAO {
 		int id = resultSet.getInt("IdDireccion");
 		String pais = resultSet.getString("pais"); 
 		String provincia = resultSet.getString("provincia"); 
-		String localidad = resultSet.getString("localidad"); 
+		String localidad = resultSet.getString("localidad");
+		String codigoPostal = resultSet.getString("codigoPostal");
 		String calle = resultSet.getString("calle"); 
 		String altura = resultSet.getString("altura"); 
 		String piso = resultSet.getString("piso"); 
 		String departamento = resultSet.getString("departamento");
 		
-		return new DireccionDTO(id, pais, provincia, localidad, calle, altura, piso, departamento);
+		return new DireccionDTO(id, pais, provincia, localidad, codigoPostal, calle, altura, piso, departamento);
 	}
 
 }

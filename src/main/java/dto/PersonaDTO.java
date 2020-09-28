@@ -6,16 +6,18 @@ public class PersonaDTO
 	private String nombre;
 	private String telefono;
 	private String email;
+	private String userLinkedin;
 	private String Fecha_nacimiento;
 	private DireccionDTO direccion;
 	private TipoContactoDTO tipoContacto;
 
-	public PersonaDTO(int idPersona, String nombre, String telefono, String email, String Fecha_nacimiento, DireccionDTO direccion, TipoContactoDTO tipoContacto)
+	public PersonaDTO(int idPersona, String nombre, String telefono, String email,String userLinkedin, String Fecha_nacimiento, DireccionDTO direccion, TipoContactoDTO tipoContacto)
 	{
 		this.idPersona = idPersona;
 		this.nombre = nombre;
 		this.telefono = telefono;
 		this.email = email;
+		this.userLinkedin = userLinkedin;
 		this.Fecha_nacimiento = Fecha_nacimiento;
 		this.direccion = direccion;
 		this.tipoContacto = tipoContacto;
@@ -81,5 +83,15 @@ public class PersonaDTO
 	public void setTelefono(String telefono) 
 	{
 		this.telefono = telefono;
+	}
+
+	public String getUserLinkedin()
+	{
+		return this.userLinkedin;
+	}
+
+	public void setUserLinkedin(String userLinkedin)
+	{
+		this.userLinkedin = userLinkedin;
 	}
 }
