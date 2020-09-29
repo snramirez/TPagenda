@@ -221,7 +221,7 @@ public class VentanaPersona extends JFrame
 		panel.add(comboTipo);
 		
 		JLabel lblPais = new JLabel("Pais: ");
-		lblPais.setBounds(10, 167, 46, 14);
+		lblPais.setBounds(10, 133, 46, 14);
 		panel.add(lblPais);
 		comboPais = new JComboBox<>();
 		comboPais.setBounds(80, 130, 120, 20);
@@ -244,7 +244,7 @@ public class VentanaPersona extends JFrame
 		panel.add(btnNewButton_1);
 		
 		JButton btnNewButton_2 = new JButton("New button");
-		btnNewButton_2.setBounds(227, 190, 89, 23);
+		btnNewButton_2.setBounds(227, 192, 89, 23);
 		panel.add(btnNewButton_2);
 		
 		JButton btnNewButton_3 = new JButton("New button");
@@ -252,20 +252,20 @@ public class VentanaPersona extends JFrame
 		panel.add(btnNewButton_3);		
 		
 		JLabel lblCodigoPostal = new JLabel("Cod. Postal:");
-		lblCodigoPostal.setBounds(229, 202, 68, 14);
+		lblCodigoPostal.setBounds(20, 426, 68, 14);
 		panel.add(lblCodigoPostal);
 		
 		txtCodigoPostal = new JTextField();
-		txtCodigoPostal.setBounds(293, 199, 58, 20);
+		txtCodigoPostal.setBounds(108, 423, 58, 20);
 		panel.add(txtCodigoPostal);
 		txtCodigoPostal.setColumns(10);
 		
 		JLabel lblLinkedin = new JLabel("Usuario LinkedIn: ");
-		lblLinkedin.setBounds(10, 127, 89, 14);
+		lblLinkedin.setBounds(10, 391, 89, 14);
 		panel.add(lblLinkedin);
 		
 		txtLinkedin = new JTextField();
-		txtLinkedin.setBounds(113, 124, 161, 20);
+		txtLinkedin.setBounds(105, 388, 161, 20);
 		panel.add(txtLinkedin);
 		txtLinkedin.setColumns(10);
 
