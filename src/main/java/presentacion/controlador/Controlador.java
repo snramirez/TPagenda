@@ -10,6 +10,7 @@ import dto.DireccionDTO;
 import dto.TipoContactoDTO;
 import modelo.Agenda;
 import presentacion.reportes.ReporteAgenda;
+import presentacion.vista.VentanaAgregarPais;
 import presentacion.vista.VentanaEditarPersona;
 import presentacion.vista.VentanaPersona;
 import presentacion.vista.Vista;
@@ -21,6 +22,7 @@ public class Controlador implements ActionListener
 		private List<PersonaDTO> personasEnTabla;
 		private VentanaPersona ventanaPersona;
 		private VentanaEditarPersona ventanaEditarPersona;
+		private VentanaAgregarPais ventanaAgregarPais;
 		private Agenda agenda;
 		
 		public Controlador(Vista vista, Agenda agenda)
@@ -30,13 +32,24 @@ public class Controlador implements ActionListener
 			this.vista.getBtnEditar().addActionListener(b->ventanaEditarPersona(b));
 			this.vista.getBtnBorrar().addActionListener(s->borrarPersona(s));
 			this.vista.getBtnReporte().addActionListener(r->mostrarReporte(r));
+			
 			this.ventanaPersona = VentanaPersona.getInstance();
 			this.ventanaPersona.getBtnAgregarPersona().addActionListener(p->guardarPersona(p));
+			this.ventanaPersona.getBtnEditarPais().addActionListener(d->ventanaAgregarPais(d));
+			
 			this.ventanaEditarPersona = VentanaEditarPersona.getInstance();
 			this.ventanaEditarPersona.getBtnEditarPersona().addActionListener(c->editarPersona(c));
+			
+			this.ventanaAgregarPais = ventanaAgregarPais.getInstance();
 			this.agenda = agenda;
 		}
 		
+		private void ventanaAgregarPais(ActionEvent d) {
+			this.ventanaAgregarPais.llenarTabla(this.agenda.obtenerPais());
+			this.ventanaAgregarPais.mostrarVentana();
+			
+		}
+
 		private void editarPersona(ActionEvent c) {
 			int[] filasSeleccionadas = this.vista.getTablaPersonas().getSelectedRows();
 			

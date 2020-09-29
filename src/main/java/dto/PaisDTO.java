@@ -2,6 +2,8 @@ package dto;
 
 public class PaisDTO {
 	
+	
+
 	private int idPais;
 	private String nombrePais;
 	
@@ -25,6 +27,11 @@ public class PaisDTO {
 	
 	public void setNombrePais(String nombrePais) {
 		this.nombrePais = nombrePais;
+	}
+	
+	@Override
+	public String toString() {
+		return this.nombrePais;
 	}
 	
 
