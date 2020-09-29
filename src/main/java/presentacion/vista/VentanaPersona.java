@@ -1,10 +1,18 @@
 package presentacion.vista;
 
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.util.HashSet;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
@@ -33,6 +41,8 @@ public class VentanaPersona extends JFrame
 	private JComboBox<String> comboProvincia;
 	private JComboBox<String> comboPais;
 	private JComboBox<String> comboLocalidad;
+	private JTextField txtCodigoPostal;
+	private JTextField txtLinkedin;
 	
 	public static VentanaPersona getInstance()
 	{
@@ -57,7 +67,7 @@ public class VentanaPersona extends JFrame
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(10, 11, 361, 471);
+		panel.setBounds(10, 11, 361, 471);		
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
@@ -76,6 +86,21 @@ public class VentanaPersona extends JFrame
 		
 		txtTelefono = new JTextField();
 		txtTelefono.setBounds(133, 49, 207, 20);
+		txtTelefono.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent key) {
+				char letra = key.getKeyChar();
+				//checkea que no sea un numero
+				if(letra < '0' || letra > '9') {
+					//checkea que no sea borrar o escape
+					if(!((int)key.getKeyChar() == 27 || (int)key.getKeyChar() == 8)) {
+						key.consume();
+						JOptionPane.showMessageDialog(rootPane,"Solo numeros");
+					}
+				}
+			}
+		});
+
 		panel.add(txtTelefono);
 		txtTelefono.setColumns(10);
 		
@@ -98,6 +123,20 @@ public class VentanaPersona extends JFrame
 		
 		txtAltura = new JTextField();
 		txtAltura.setBounds(52, 264, 58, 20);
+		txtAltura.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent key) {
+				char letra = key.getKeyChar();
+				//checkea que no sea un numero
+				if(letra < '0' || letra > '9') {
+					//checkea que no sea borrar o escape
+					if(!((int)key.getKeyChar() == 27 || (int)key.getKeyChar() == 8)) {
+						key.consume();
+						JOptionPane.showMessageDialog(rootPane,"Solo numeros");
+					}
+				}
+			}
+		});
 		panel.add(txtAltura);
 		txtAltura.setColumns(10);
 		
@@ -107,13 +146,28 @@ public class VentanaPersona extends JFrame
 		
 		txtPiso = new JTextField();
 		txtPiso.setBounds(154, 264, 46, 20);
+		txtPiso.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent key) {
+				char letra = key.getKeyChar();
+				//checkea que no sea un numero
+				if(letra < '0' || letra > '9') {
+					//checkea que no sea borrar o escape
+					if(!((int)key.getKeyChar() == 27 || (int)key.getKeyChar() == 8)) {
+						key.consume();
+						JOptionPane.showMessageDialog(rootPane,"Solo numeros");
+					}
+				}
+			}
+		});
+
 		panel.add(txtPiso);
 		txtPiso.setColumns(10);
 		
 		JLabel lblDepto = new JLabel("Depto:");
 		lblDepto.setBounds(210, 267, 46, 14);
 		panel.add(lblDepto);
-		
+    
 		txtDepto = new JTextField();
 		txtDepto.setBounds(261, 267, 46, 20);
 		panel.add(txtDepto);
@@ -133,13 +187,24 @@ public class VentanaPersona extends JFrame
 		
 		txtEmail = new JTextField();
 		txtEmail.setBounds(133, 89, 207, 20);
+		txtEmail.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent event) {
+				String email = txtEmail.getText().toString();
+				Pattern patron = Pattern.compile("^[\\w-]+(\\.[\\w-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+				Matcher mat = patron.matcher(email);
+				if(!mat.find()) {
+					JOptionPane.showMessageDialog(rootPane, "Formato de email invalido ej 'nombre@compania.com'");
+				}
+			}
+		});
 		panel.add(txtEmail);
 		txtEmail.setColumns(10);
 		
 		JLabel lblCumpleaños = new JLabel("Cumpleaños:");
 		lblCumpleaños.setBounds(10, 314, 79, 14);
 		panel.add(lblCumpleaños);
-		
+    
 		txtCumpleaños = new JTextField();
 		txtCumpleaños.setText("AAAA/MM/DD");
 		txtCumpleaños.setToolTipText("");
@@ -156,9 +221,8 @@ public class VentanaPersona extends JFrame
 		panel.add(comboTipo);
 		
 		JLabel lblPais = new JLabel("Pais: ");
-		lblPais.setBounds(10, 133, 46, 14);
+		lblPais.setBounds(10, 167, 46, 14);
 		panel.add(lblPais);
-		
 		comboPais = new JComboBox<>();
 		comboPais.setBounds(80, 130, 120, 20);
 		panel.add(comboPais);
@@ -185,7 +249,26 @@ public class VentanaPersona extends JFrame
 		
 		JButton btnNewButton_3 = new JButton("New button");
 		btnNewButton_3.setBounds(227, 350, 89, 23);
-		panel.add(btnNewButton_3);
+		panel.add(btnNewButton_3);		
+		
+		JLabel lblCodigoPostal = new JLabel("Cod. Postal:");
+		lblCodigoPostal.setBounds(229, 202, 68, 14);
+		panel.add(lblCodigoPostal);
+		
+		txtCodigoPostal = new JTextField();
+		txtCodigoPostal.setBounds(293, 199, 58, 20);
+		panel.add(txtCodigoPostal);
+		txtCodigoPostal.setColumns(10);
+		
+		JLabel lblLinkedin = new JLabel("Usuario LinkedIn: ");
+		lblLinkedin.setBounds(10, 127, 89, 14);
+		panel.add(lblLinkedin);
+		
+		txtLinkedin = new JTextField();
+		txtLinkedin.setBounds(113, 124, 161, 20);
+		panel.add(txtLinkedin);
+		txtLinkedin.setColumns(10);
+
 		
 		this.setVisible(false);
 	}
@@ -198,36 +281,48 @@ public class VentanaPersona extends JFrame
 	public void llenarTipos(List<TipoContactoDTO> Tipos) 
 	{	
 		this.comboTipo.removeAllItems();
+		HashSet<String> set = new HashSet<>();
 		for (TipoContactoDTO p : Tipos)
 		{
-			this.comboTipo.addItem(p);
+			if(!set.contains(p.getNombreTipoContacto()))
+				this.comboTipo.addItem(p);
+			set.add(p.getNombreTipoContacto());
 		}
 	}
 	
 	public void llenarPais(List<DireccionDTO> Direcciones) 
 	{	
 		this.comboPais.removeAllItems();
+		HashSet<String> set = new HashSet<>();
 		for (DireccionDTO p : Direcciones)
 		{
-			this.comboPais.addItem(p.getPais());
+			if(!set.contains(p.getPais()))
+				this.comboPais.addItem(p.getPais());
+			set.add(p.getPais());
 		}
 	}
 	
 	public void llenarProvincia(List<DireccionDTO> Direcciones) 
 	{	
 		this.comboProvincia.removeAllItems();
+		HashSet<String> set = new HashSet<>();
 		for (DireccionDTO p : Direcciones)
 		{
-			this.comboProvincia.addItem(p.getProvincia());
+			if(!set.contains(p.getProvincia()))
+				this.comboProvincia.addItem(p.getProvincia());
+			set.add(p.getProvincia());
 		}
 	}
 	
 	public void llenarLocalidad(List<DireccionDTO> Direcciones) 
 	{	
 		this.comboLocalidad.removeAllItems();
+		HashSet<String> set = new HashSet<>();
 		for (DireccionDTO p : Direcciones)
 		{
-			this.comboLocalidad.addItem(p.getLocalidad());
+			if(!set.contains(p.getLocalidad()))
+				this.comboLocalidad.addItem(p.getLocalidad());
+			set.add(p.getLocalidad());
 		}
 	}
 	
@@ -244,6 +339,8 @@ public class VentanaPersona extends JFrame
 	public JTextField getTxtPiso(){return txtPiso;}
 	public JTextField getTxtDepto(){return txtDepto;}
 	public JTextField getTxtAltura(){return txtAltura;}
+	public JTextField getLinkedin(){return txtLinkedin;}
+	public JTextField getCodigoPostal(){return txtCodigoPostal;}
 	public JComboBox getTipoContacto(){return comboTipo;}
 	public JComboBox getLocalidad(){return comboLocalidad;}
 	public JComboBox getPais(){return comboPais;}

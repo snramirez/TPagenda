@@ -28,8 +28,8 @@ public class Vista
 	private JButton btnReporte;
 	private JButton btnEditar;
 	private DefaultTableModel modelPersonas;
-	private  String[] nombreColumnas = {"Nombre y apellido","Telefono","Email","Pais",
-			"Provincia","Localidad","Calle","Altura","Piso","Depto","Cumpleaños","Tipo de contacto"};
+	private  String[] nombreColumnas = {"Nombre y apellido","Telefono","Email","LinkedIn","Pais",
+			"Provincia","Localidad","Cod. Postal","Calle","Altura","Piso","Depto","Cumpleaños","Tipo de contacto"};
 
 	public Vista() 
 	{
@@ -58,9 +58,9 @@ public class Vista
 		tablaPersonas = new JTable(modelPersonas);
 		
 		tablaPersonas.getColumnModel().getColumn(0).setPreferredWidth(103);
-		tablaPersonas.getColumnModel().getColumn(0).setResizable(false);
+		tablaPersonas.getColumnModel().getColumn(0).setResizable(true);
 		tablaPersonas.getColumnModel().getColumn(1).setPreferredWidth(100);
-		tablaPersonas.getColumnModel().getColumn(1).setResizable(false);
+		tablaPersonas.getColumnModel().getColumn(1).setResizable(true);
 		
 		spPersonas.setViewportView(tablaPersonas);
 		
@@ -150,9 +150,11 @@ public class Vista
 			String nombre = p.getNombre();
 			String tel = p.getTelefono();
 			String email = p.getEmail();
+			String usuarioLinkedin = p.getUserLinkedin();
 			String pais = d.getPais();
 			String prov = d.getProvincia();
 			String localidad = d.getLocalidad();
+			String codigoPostal = d.getCodigoPostal();
 			String calle = d.getCalle();
 			String altura = d.getAltura();
 			String piso = d.getPiso();
@@ -160,7 +162,7 @@ public class Vista
 			String fecha_nac = p.getFecha_nacimiento();
 			String tipo = t.getNombreTipoContacto();
 
-			Object[] fila = {nombre, tel, email,pais,prov,localidad,calle,altura,piso,depto,fecha_nac,tipo};
+			Object[] fila = {nombre, tel, email,usuarioLinkedin,pais,prov,localidad,codigoPostal,calle,altura,piso,depto,fecha_nac,tipo};
 			this.getModelPersonas().addRow(fila);
 		}
 		
