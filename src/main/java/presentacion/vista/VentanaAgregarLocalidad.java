@@ -1,42 +1,43 @@
 package presentacion.vista;
 
+import javax.swing.JFrame;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
-import dto.PaisDTO;
 import java.util.List;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
+import dto.LocalidadDTO;
 
-public class VentanaAgregarPais extends JFrame {
+
+
+public class VentanaAgregarLocalidad extends JFrame{
+private static final long serialVersionUID = 1L;
 	
-	private static final long serialVersionUID = 1L;
-	
-	private static VentanaAgregarPais INSTANCE;
+	private static VentanaAgregarLocalidad INSTANCE;
 	private JPanel contentPane;
-	private DefaultListModel<PaisDTO> modeloPais;
-	private JList<PaisDTO> listaPais;
+	private DefaultListModel<LocalidadDTO> modeloLocalidad;
+	private JList<LocalidadDTO> listaLocalidad;
 	private JButton btnAgregar;
 	private JButton btnBorrar;
 	private JButton btnEditar;
 	
 	
-	public static VentanaAgregarPais getInstance()
+	public static VentanaAgregarLocalidad getInstance()
 	{
 		if(INSTANCE == null)
 		{
-			INSTANCE = new VentanaAgregarPais(); 	
-			return new VentanaAgregarPais();
+			INSTANCE = new VentanaAgregarLocalidad(); 	
+			return new VentanaAgregarLocalidad();
 		}
 		else
 			return INSTANCE;
 	}
 	
-	public VentanaAgregarPais() {
+	public VentanaAgregarLocalidad() {
 		super();
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -56,16 +57,16 @@ public class VentanaAgregarPais extends JFrame {
 		panel.add(spPersonas);
 		
 		
-		modeloPais = new DefaultListModel<PaisDTO>();
+		modeloLocalidad = new DefaultListModel<LocalidadDTO>();
 		
-		listaPais = new JList<PaisDTO>(modeloPais);
-		listaPais.setBounds(12, 555, 291, -509);
-		listaPais.setVisibleRowCount(10);
-		listaPais.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		listaLocalidad = new JList<LocalidadDTO>(modeloLocalidad);
+		listaLocalidad.setBounds(12, 555, 291, -509);
+		listaLocalidad.setVisibleRowCount(10);
+		listaLocalidad.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
-		spPersonas.setViewportView(listaPais);
+		spPersonas.setViewportView(listaLocalidad);
 		
-		JLabel lblLocalidades_1 = new JLabel("Paises:");
+		JLabel lblLocalidades_1 = new JLabel("Localidad:");
 		lblLocalidades_1.setBounds(12, 13, 79, 16);
 		panel.add(lblLocalidades_1);
 		
@@ -83,11 +84,11 @@ public class VentanaAgregarPais extends JFrame {
 			
 	}
 	
-	public DefaultListModel<PaisDTO> getModeloPais() {
-		return modeloPais;
+	public DefaultListModel<LocalidadDTO> getModeloLocalidad() {
+		return modeloLocalidad;
 	}
-	public PaisDTO getSeleccionada() {
-		return (PaisDTO) this.listaPais.getSelectedValue();
+	public LocalidadDTO getSeleccionada() {
+		return (LocalidadDTO) this.listaLocalidad.getSelectedValue();
 	}
 
 	public JButton getBtnAgregar() {
@@ -102,10 +103,10 @@ public class VentanaAgregarPais extends JFrame {
 		return btnEditar;
 	}
 
-	public void llenarTabla(List<PaisDTO> paises) {
-		this.modeloPais.removeAllElements();
-		for(PaisDTO l : paises) {
-			this.modeloPais.addElement(l);
+	public void llenarTabla(List<LocalidadDTO> localidad) {
+		this.modeloLocalidad.removeAllElements();
+		for(LocalidadDTO l : localidad) {
+			this.modeloLocalidad.addElement(l);
 		}
 	
 	}
@@ -113,4 +114,5 @@ public class VentanaAgregarPais extends JFrame {
 	{
 		this.setVisible(true);
 	}
+
 }

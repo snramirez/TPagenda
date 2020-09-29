@@ -12,7 +12,10 @@ import modelo.Agenda;
 import persistencia.conexion.Conexion;
 import presentacion.reportes.ReporteAgenda;
 import presentacion.vista.VentanaAgregarPais;
+import presentacion.vista.VentanaAgregarProvincia;
+import presentacion.vista.VentanaAgregarTipo;
 import presentacion.vista.Login;
+import presentacion.vista.VentanaAgregarLocalidad;
 import presentacion.vista.VentanaEditarPersona;
 import presentacion.vista.VentanaPersona;
 import presentacion.vista.Vista;
@@ -26,6 +29,9 @@ public class Controlador implements ActionListener
 		private VentanaPersona ventanaPersona;
 		private VentanaEditarPersona ventanaEditarPersona;
 		private VentanaAgregarPais ventanaAgregarPais;
+		private VentanaAgregarProvincia ventanaAgregarProvincia;
+		private VentanaAgregarLocalidad ventanaAgregarLocalidad;
+		private VentanaAgregarTipo ventanaAgregarTipo;
 		private Agenda agenda;
 		
 		public Controlador(Vista vista, Agenda agenda)
@@ -41,14 +47,35 @@ public class Controlador implements ActionListener
 			this.ventanaPersona = VentanaPersona.getInstance();
 			this.ventanaPersona.getBtnAgregarPersona().addActionListener(p->guardarPersona(p));
 			this.ventanaPersona.getBtnEditarPais().addActionListener(d->ventanaAgregarPais(d));
+			this.ventanaPersona.getBtnEditarProv().addActionListener(f->ventanaAgregarProv(f));
+			this.ventanaPersona.getBtnEditarLoc().addActionListener(g->ventanaAgregarLoc(g));
+			this.ventanaPersona.getBtnEditarTipo().addActionListener(h->ventanaAgregarTipo(h));
 			
 			this.ventanaEditarPersona = VentanaEditarPersona.getInstance();
 			this.ventanaEditarPersona.getBtnEditarPersona().addActionListener(c->editarPersona(c));
 			
 			this.ventanaAgregarPais = ventanaAgregarPais.getInstance();
+			this.ventanaAgregarProvincia = ventanaAgregarProvincia.getInstance();
+			this.ventanaAgregarLocalidad = ventanaAgregarLocalidad.getInstance();
+			this.ventanaAgregarTipo = ventanaAgregarTipo.getInstance();
 			this.agenda = agenda;
 		}
 			
+		private void ventanaAgregarProv(ActionEvent d) {
+			this.ventanaAgregarProvincia.llenarTabla(this.agenda.obtenerProvincia());
+			this.ventanaAgregarProvincia.mostrarVentana();	
+		}
+
+		private void ventanaAgregarLoc(ActionEvent d) {
+			this.ventanaAgregarLocalidad.llenarTabla(this.agenda.obtenerLocalidad());
+			this.ventanaAgregarLocalidad.mostrarVentana();	
+		}
+
+		private void ventanaAgregarTipo(ActionEvent d) {
+			this.ventanaAgregarTipo.llenarTabla(this.agenda.obtenerTipoContactos());
+			this.ventanaAgregarTipo.mostrarVentana();
+		}
+
 		private void validarDatos(ActionEvent i) {
 			if (Conexion.verificarCredenciales(this.login.getUsername().getText(),String.valueOf(this.login.getPassword().getPassword()))){
 				this.refrescarTabla();
@@ -130,9 +157,9 @@ public class Controlador implements ActionListener
 		private void ventanaAgregarPersona(ActionEvent a) {
 			this.ventanaPersona.mostrarVentana();
 			this.ventanaPersona.llenarTipos(this.agenda.obtenerTipoContactos());
-			this.ventanaPersona.llenarPais(this.agenda.obtenerDirecciones());
-			this.ventanaPersona.llenarProvincia(this.agenda.obtenerDirecciones());
-			this.ventanaPersona.llenarLocalidad(this.agenda.obtenerDirecciones());
+			this.ventanaPersona.llenarPais(this.agenda.obtenerPais());
+			this.ventanaPersona.llenarProvincia(this.agenda.obtenerProvincia());
+			this.ventanaPersona.llenarLocalidad(this.agenda.obtenerLocalidad());
 		}
 
 		private void guardarPersona(ActionEvent p) {

@@ -26,4 +26,9 @@ public class LocalidadDTO {
 		this.nombreLocalidad = nombreLocalidad;
 	}
 	
+	@Override
+	public String toString() {
+		return this.nombreLocalidad;
+	}
+	
 }

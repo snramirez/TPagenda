@@ -18,6 +18,9 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import dto.DireccionDTO;
+import dto.LocalidadDTO;
+import dto.PaisDTO;
+import dto.ProvinciaDTO;
 import dto.TipoContactoDTO;
 
 import javax.swing.JComboBox;
@@ -30,6 +33,9 @@ public class VentanaPersona extends JFrame
 	private JTextField txtTelefono;
 	private JButton btnAgregarPersona;
 	private JButton btnEditarPais;
+	private JButton btnEditarProv;
+	private JButton btnEditarLoc;
+	private JButton btnEditarTipo;
 	private static VentanaPersona INSTANCE;
 	private JTextField txtCalle;
 	private JTextField txtAltura;
@@ -239,17 +245,17 @@ public class VentanaPersona extends JFrame
 		btnEditarPais.setBounds(227, 130, 89, 23);
 		panel.add(btnEditarPais);
 		
-		JButton btnNewButton_1 = new JButton("New button");
-		btnNewButton_1.setBounds(227, 160, 89, 23);
-		panel.add(btnNewButton_1);
+		btnEditarProv = new JButton("Editar");
+		btnEditarProv.setBounds(227, 160, 89, 23);
+		panel.add(btnEditarProv);
 		
-		JButton btnNewButton_2 = new JButton("New button");
-		btnNewButton_2.setBounds(227, 192, 89, 23);
-		panel.add(btnNewButton_2);
+		btnEditarLoc = new JButton("Editar");
+		btnEditarLoc.setBounds(227, 192, 89, 23);
+		panel.add(btnEditarLoc);
 		
-		JButton btnNewButton_3 = new JButton("New button");
-		btnNewButton_3.setBounds(227, 350, 89, 23);
-		panel.add(btnNewButton_3);		
+		btnEditarTipo = new JButton("Editar");
+		btnEditarTipo.setBounds(227, 350, 89, 23);
+		panel.add(btnEditarTipo);		
 		
 		JLabel lblCodigoPostal = new JLabel("Cod. Postal:");
 		lblCodigoPostal.setBounds(20, 426, 68, 14);
@@ -290,39 +296,39 @@ public class VentanaPersona extends JFrame
 		}
 	}
 	
-	public void llenarPais(List<DireccionDTO> Direcciones) 
+	public void llenarPais(List<PaisDTO> pais) 
 	{	
 		this.comboPais.removeAllItems();
 		HashSet<String> set = new HashSet<>();
-		for (DireccionDTO p : Direcciones)
+		for (PaisDTO p : pais)
 		{
-			if(!set.contains(p.getPais()))
-				this.comboPais.addItem(p.getPais());
-			set.add(p.getPais());
+			if(!set.contains(p.getNombrePais()))
+				this.comboPais.addItem(p.getNombrePais());
+			set.add(p.getNombrePais());
 		}
 	}
 	
-	public void llenarProvincia(List<DireccionDTO> Direcciones) 
+	public void llenarProvincia(List<ProvinciaDTO> provincia) 
 	{	
 		this.comboProvincia.removeAllItems();
 		HashSet<String> set = new HashSet<>();
-		for (DireccionDTO p : Direcciones)
+		for (ProvinciaDTO p : provincia)
 		{
-			if(!set.contains(p.getProvincia()))
-				this.comboProvincia.addItem(p.getProvincia());
-			set.add(p.getProvincia());
+			if(!set.contains(p.getNombreProvincia()))
+				this.comboProvincia.addItem(p.getNombreProvincia());
+			set.add(p.getNombreProvincia());
 		}
 	}
 	
-	public void llenarLocalidad(List<DireccionDTO> Direcciones) 
+	public void llenarLocalidad(List<LocalidadDTO> localidad) 
 	{	
 		this.comboLocalidad.removeAllItems();
 		HashSet<String> set = new HashSet<>();
-		for (DireccionDTO p : Direcciones)
+		for (LocalidadDTO p : localidad)
 		{
-			if(!set.contains(p.getLocalidad()))
-				this.comboLocalidad.addItem(p.getLocalidad());
-			set.add(p.getLocalidad());
+			if(!set.contains(p.getNombreLocalidad()))
+				this.comboLocalidad.addItem(p.getNombreLocalidad());
+			set.add(p.getNombreLocalidad());
 		}
 	}
 	
@@ -354,6 +360,21 @@ public class VentanaPersona extends JFrame
 	public JButton getBtnEditarPais() 
 	{
 		return btnEditarPais;
+	}
+	
+	public JButton getBtnEditarProv() 
+	{
+		return btnEditarProv;
+	}
+	
+	public JButton getBtnEditarLoc() 
+	{
+		return btnEditarLoc;
+	}
+	
+	public JButton getBtnEditarTipo() 
+	{
+		return btnEditarTipo;
 	}
 
 	public void cerrar()

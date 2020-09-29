@@ -2,6 +2,8 @@ package dto;
 
 public class ProvinciaDTO {
 	
+	
+
 	private int idProvincia;
 	private String nombreProvincia;
 	
@@ -24,6 +26,11 @@ public class ProvinciaDTO {
 	
 	public void setNombreProvincia(String nombreProvincia) {
 		this.nombreProvincia = nombreProvincia;
+	}
+	
+	@Override
+	public String toString() {
+		return this.nombreProvincia;
 	}
 
 }
