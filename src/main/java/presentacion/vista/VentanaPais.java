@@ -12,11 +12,11 @@ import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
 
-public class VentanaAgregarPais extends JFrame {
+public class VentanaPais extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
 	
-	private static VentanaAgregarPais INSTANCE;
+	private static VentanaPais INSTANCE;
 	private JPanel contentPane;
 	private DefaultListModel<PaisDTO> modeloPais;
 	private JList<PaisDTO> listaPais;
@@ -25,18 +25,18 @@ public class VentanaAgregarPais extends JFrame {
 	private JButton btnEditar;
 	
 	
-	public static VentanaAgregarPais getInstance()
+	public static VentanaPais getInstance()
 	{
 		if(INSTANCE == null)
 		{
-			INSTANCE = new VentanaAgregarPais(); 	
-			return new VentanaAgregarPais();
+			INSTANCE = new VentanaPais(); 	
+			return new VentanaPais();
 		}
 		else
 			return INSTANCE;
 	}
 	
-	public VentanaAgregarPais() {
+	public VentanaPais() {
 		super();
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

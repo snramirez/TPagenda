@@ -11,11 +11,11 @@ import dto.TipoContactoDTO;
 import modelo.Agenda;
 import persistencia.conexion.Conexion;
 import presentacion.reportes.ReporteAgenda;
-import presentacion.vista.VentanaAgregarPais;
-import presentacion.vista.VentanaAgregarProvincia;
-import presentacion.vista.VentanaAgregarTipo;
+import presentacion.vista.VentanaPais;
+import presentacion.vista.VentanaProvincia;
+import presentacion.vista.VentanaTipo;
 import presentacion.vista.Login;
-import presentacion.vista.VentanaAgregarLocalidad;
+import presentacion.vista.VentanaLocalidad;
 import presentacion.vista.VentanaEditarPersona;
 import presentacion.vista.VentanaPersona;
 import presentacion.vista.Vista;
@@ -28,10 +28,10 @@ public class Controlador implements ActionListener
 		private List<PersonaDTO> personasEnTabla;
 		private VentanaPersona ventanaPersona;
 		private VentanaEditarPersona ventanaEditarPersona;
-		private VentanaAgregarPais ventanaAgregarPais;
-		private VentanaAgregarProvincia ventanaAgregarProvincia;
-		private VentanaAgregarLocalidad ventanaAgregarLocalidad;
-		private VentanaAgregarTipo ventanaAgregarTipo;
+		private VentanaPais ventanaAgregarPais;
+		private VentanaProvincia ventanaAgregarProvincia;
+		private VentanaLocalidad ventanaAgregarLocalidad;
+		private VentanaTipo ventanaAgregarTipo;
 		private Agenda agenda;
 		
 		public Controlador(Vista vista, Agenda agenda)

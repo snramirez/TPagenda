@@ -11,33 +11,33 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
-import dto.TipoContactoDTO;
+import dto.ProvinciaDTO;
 
 
-public class VentanaAgregarTipo extends JFrame{
+public class VentanaProvincia extends JFrame{
 private static final long serialVersionUID = 1L;
 	
-	private static VentanaAgregarTipo INSTANCE;
+	private static VentanaProvincia INSTANCE;
 	private JPanel contentPane;
-	private DefaultListModel<TipoContactoDTO> modeloTipo;
-	private JList<TipoContactoDTO> listaTipo;
+	private DefaultListModel<ProvinciaDTO> modeloProvincia;
+	private JList<ProvinciaDTO> listaProvincia;
 	private JButton btnAgregar;
 	private JButton btnBorrar;
 	private JButton btnEditar;
 	
 	
-	public static VentanaAgregarTipo getInstance()
+	public static VentanaProvincia getInstance()
 	{
 		if(INSTANCE == null)
 		{
-			INSTANCE = new VentanaAgregarTipo(); 	
-			return new VentanaAgregarTipo();
+			INSTANCE = new VentanaProvincia(); 	
+			return new VentanaProvincia();
 		}
 		else
 			return INSTANCE;
 	}
 	
-	public VentanaAgregarTipo() {
+	public VentanaProvincia() {
 		super();
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -57,16 +57,16 @@ private static final long serialVersionUID = 1L;
 		panel.add(spPersonas);
 		
 		
-		modeloTipo = new DefaultListModel<TipoContactoDTO>();
+		modeloProvincia = new DefaultListModel<ProvinciaDTO>();
 		
-		listaTipo = new JList<TipoContactoDTO>(modeloTipo);
-		listaTipo.setBounds(12, 555, 291, -509);
-		listaTipo.setVisibleRowCount(10);
-		listaTipo.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		listaProvincia = new JList<ProvinciaDTO>(modeloProvincia);
+		listaProvincia.setBounds(12, 555, 291, -509);
+		listaProvincia.setVisibleRowCount(10);
+		listaProvincia.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
-		spPersonas.setViewportView(listaTipo);
+		spPersonas.setViewportView(listaProvincia);
 		
-		JLabel lblLocalidades_1 = new JLabel("Tipo de Contacto:");
+		JLabel lblLocalidades_1 = new JLabel("Provincias:");
 		lblLocalidades_1.setBounds(12, 13, 79, 16);
 		panel.add(lblLocalidades_1);
 		
@@ -84,11 +84,11 @@ private static final long serialVersionUID = 1L;
 			
 	}
 	
-	public DefaultListModel<TipoContactoDTO> getModeloTipo() {
-		return modeloTipo;
+	public DefaultListModel<ProvinciaDTO> getModeloProvincia() {
+		return modeloProvincia;
 	}
-	public TipoContactoDTO getSeleccionada() {
-		return (TipoContactoDTO) this.listaTipo.getSelectedValue();
+	public ProvinciaDTO getSeleccionada() {
+		return (ProvinciaDTO) this.listaProvincia.getSelectedValue();
 	}
 
 	public JButton getBtnAgregar() {
@@ -103,10 +103,10 @@ private static final long serialVersionUID = 1L;
 		return btnEditar;
 	}
 
-	public void llenarTabla(List<TipoContactoDTO> tipo) {
-		this.modeloTipo.removeAllElements();
-		for(TipoContactoDTO l : tipo) {
-			this.modeloTipo.addElement(l);
+	public void llenarTabla(List<ProvinciaDTO> provincia) {
+		this.modeloProvincia.removeAllElements();
+		for(ProvinciaDTO l : provincia) {
+			this.modeloProvincia.addElement(l);
 		}
 	
 	}

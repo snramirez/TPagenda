@@ -14,10 +14,10 @@ import dto.LocalidadDTO;
 
 
 
-public class VentanaAgregarLocalidad extends JFrame{
+public class VentanaLocalidad extends JFrame{
 private static final long serialVersionUID = 1L;
 	
-	private static VentanaAgregarLocalidad INSTANCE;
+	private static VentanaLocalidad INSTANCE;
 	private JPanel contentPane;
 	private DefaultListModel<LocalidadDTO> modeloLocalidad;
 	private JList<LocalidadDTO> listaLocalidad;
@@ -26,18 +26,18 @@ private static final long serialVersionUID = 1L;
 	private JButton btnEditar;
 	
 	
-	public static VentanaAgregarLocalidad getInstance()
+	public static VentanaLocalidad getInstance()
 	{
 		if(INSTANCE == null)
 		{
-			INSTANCE = new VentanaAgregarLocalidad(); 	
-			return new VentanaAgregarLocalidad();
+			INSTANCE = new VentanaLocalidad(); 	
+			return new VentanaLocalidad();
 		}
 		else
 			return INSTANCE;
 	}
 	
-	public VentanaAgregarLocalidad() {
+	public VentanaLocalidad() {
 		super();
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
