@@ -15,9 +15,9 @@ import persistencia.dao.interfaz.TipoContactoDAO;
 public class TipoContactoDAOSQL implements TipoContactoDAO {
 	
 	private static final String insert = 
-			"INSERT INTO tipo_contacto(idtipo, Nombre_tipo) VALUES (?,?)";
+			"INSERT INTO tipo_contacto(idtipo, Nombre_tipo, activa) VALUES (?,?,1)";
 	private static final String delete = 
-			"DELETE FROM tipo_contacto WHERE idtipo = ?";
+			"UPDATE tipo_contacto SET activa = 0 WHERE idtipo = ?";
 	private static final String readall = 
 			"SELECT * from tipo_contacto;";
 	private static final String update = 
@@ -122,7 +122,9 @@ public class TipoContactoDAOSQL implements TipoContactoDAO {
 			resultSet = statement.executeQuery();
 			while(resultSet.next())
 			{
-				tipoContacto.add(getTipoContactoDTO(resultSet));
+				if(resultSet.getInt("activa") == 1) {
+					tipoContacto.add(getTipoContactoDTO(resultSet));
+				}
 			}
 		} 
 		catch (SQLException e) 

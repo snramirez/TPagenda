@@ -69,6 +69,16 @@ public class Agenda
 		this.tipocont.insert(tipo);
 	}
 	
+	public void borrarTipoContacto(TipoContactoDTO tipo_a_borrar)
+	{
+		this.tipocont.delete(tipo_a_borrar);
+	}
+	
+	public void editarTipoContacto(TipoContactoDTO tipo_a_editar)
+	{
+		this.tipocont.update(tipo_a_editar);
+	}
+	
 	public List<TipoContactoDTO> obtenerTipoContactos () {
 		return this.tipocont.readAll();
 	}

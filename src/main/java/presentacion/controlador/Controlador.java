@@ -21,8 +21,12 @@ import presentacion.vista.VentanaAgregarLocalidad;
 import presentacion.vista.VentanaAgregarPais;
 import presentacion.vista.VentanaAgregarProvincia;
 import presentacion.vista.VentanaAgregarTipo;
+import presentacion.vista.VentanaEditarLocalidad;
+import presentacion.vista.VentanaEditarPais;
 import presentacion.vista.VentanaLocalidad;
 import presentacion.vista.VentanaEditarPersona;
+import presentacion.vista.VentanaEditarProvincia;
+import presentacion.vista.VentanaEditarTipo;
 import presentacion.vista.VentanaPersona;
 import presentacion.vista.Vista;
 import dto.PersonaDTO;
@@ -37,12 +41,16 @@ public class Controlador implements ActionListener
 		private VentanaEditarPersona ventanaEditarPersona;
 		private VentanaPais ventanaPais;
 		private VentanaAgregarPais ventanaAgregarPais;
+		private VentanaEditarPais ventanaEditarPais;
 		private VentanaProvincia ventanaProvincia;
 		private VentanaAgregarProvincia ventanaAgregarProvincia;
+		private VentanaEditarProvincia ventanaEditarProvincia;
 		private VentanaLocalidad ventanaLocalidad;
 		private VentanaAgregarLocalidad ventanaAgregarLocalidad;
+		private VentanaEditarLocalidad ventanaEditarLocalidad;
 		private VentanaTipo ventanaTipo;
 		private VentanaAgregarTipo ventanaAgregarTipo;
+		private VentanaEditarTipo ventanaEditarTipo;
 		private Agenda agenda;
 		
 		public Controlador(Vista vista, Agenda agenda)
@@ -67,23 +75,40 @@ public class Controlador implements ActionListener
 			
 			this.ventanaPais = ventanaPais.getInstance();
 			this.ventanaAgregarPais =ventanaAgregarPais.getInstance();
+			this.ventanaEditarPais = ventanaEditarPais.getInstance();
 			this.ventanaPais.getBtnAgregar().addActionListener(j->ventanaAgregarPais(j));
+			this.ventanaPais.getBtnEditar().addActionListener(j->ventanaEditarPais(j));
+			this.ventanaPais.getBtnBorrar().addActionListener(j->borrarPais(j));
 			this.ventanaAgregarPais.getBtnAñadir().addActionListener(k->AgregarPais(k));
+			this.ventanaEditarPais.getBtnEditar().addActionListener(k->EditarPais(k));
 			
 			this.ventanaProvincia = ventanaProvincia.getInstance();
 			this.ventanaAgregarProvincia =ventanaAgregarProvincia.getInstance();
+			this.ventanaEditarProvincia = ventanaEditarProvincia.getInstance();
 			this.ventanaProvincia.getBtnAgregar().addActionListener(j->ventanaAgregarProvincia(j));
+			this.ventanaProvincia.getBtnEditar().addActionListener(j->ventanaEditarProvincia(j));
+			this.ventanaProvincia.getBtnBorrar().addActionListener(j->borrarProvincia(j));
 			this.ventanaAgregarProvincia.getBtnAñadir().addActionListener(k->AgregarProvincia(k));
+			this.ventanaEditarProvincia.getBtnEditar().addActionListener(k->EditarProvincia(k));
 			
 			this.ventanaLocalidad = ventanaLocalidad.getInstance();
 			this.ventanaAgregarLocalidad =ventanaAgregarLocalidad.getInstance();
+			this.ventanaEditarLocalidad = ventanaEditarLocalidad.getInstance();
 			this.ventanaLocalidad.getBtnAgregar().addActionListener(j->ventanaAgregarLocalidad(j));
+			this.ventanaLocalidad.getBtnEditar().addActionListener(j->ventanaEditarLocalidad(j));
+			this.ventanaLocalidad.getBtnBorrar().addActionListener(j->borrarLocalidad(j));
 			this.ventanaAgregarLocalidad.getBtnAñadir().addActionListener(k->AgregarLocalidad(k));
+			this.ventanaEditarLocalidad.getBtnEditar().addActionListener(k->EditarLocalidad(k));
 			
 			this.ventanaTipo = ventanaTipo.getInstance();
 			this.ventanaAgregarTipo =ventanaAgregarTipo.getInstance();
+			this.ventanaEditarTipo = ventanaEditarTipo.getInstance();
 			this.ventanaTipo.getBtnAgregar().addActionListener(j->ventanaAgregarTipo(j));
+			this.ventanaTipo.getBtnEditar().addActionListener(j->ventanaEditarTipo(j));
+			this.ventanaTipo.getBtnBorrar().addActionListener(j->borrarTipo(j));
 			this.ventanaAgregarTipo.getBtnAñadir().addActionListener(k->AgregarTipo(k));
+			this.ventanaEditarTipo.getBtnEditar().addActionListener(k->EditarTipo(k));
+			
 			this.agenda = agenda;
 		}
 			
@@ -121,6 +146,12 @@ public class Controlador implements ActionListener
 			
 		}
 		
+		private void ventanaEditarPais(ActionEvent j) {
+			this.ventanaEditarPais.getNombrePais().setText(this.ventanaPais.getSeleccionada().getNombrePais());
+			this.ventanaEditarPais.mostrarVentana();
+			
+		}
+		
 		private void AgregarPais(ActionEvent k) {
 			if (this.ventanaAgregarPais.getNombrePais().getText().length() == 0) {
 				JOptionPane.showMessageDialog(ventanaPersona, "Debe Ingresar el nombre del pais");
@@ -136,12 +167,49 @@ public class Controlador implements ActionListener
 			this.ventanaPais.llenarTabla(this.agenda.obtenerPais());
 			this.ventanaAgregarPais.cerrar();
 			}
+		}
+		
+		private void EditarPais(ActionEvent k) {
+			if (this.ventanaEditarPais.getNombrePais().getText().length() == 0) {
+				JOptionPane.showMessageDialog(ventanaPersona, "Debe Ingresar el nombre del pais");
+			}else {
+				
+			// Añado la nueva localidad ingresada
+			PaisDTO paisNuevo = new PaisDTO(this.ventanaPais.getSeleccionada().getIdPais(), this.ventanaEditarPais.getNombrePais().getText());
 			
+			this.agenda.editarPais(paisNuevo);
+			
+			// recargo los combos y cierro la ventana
+			this.ventanaPersona.llenarPais(this.agenda.obtenerPais());
+			//this.ventanaEditarPersona.llenarPais(this.agenda.obtenerPais());
+			this.ventanaPais.llenarTabla(this.agenda.obtenerPais());
+			this.ventanaEditarPais.cerrar();
+			this.refrescarTabla();
+			}
+		}
+		
+		private void borrarPais(ActionEvent a) {
+			if (this.ventanaPais.getSeleccionada() == null) {
+				JOptionPane.showMessageDialog(this.ventanaPais, "Debe seleccionar un pais");
+			}else {
+				if(JOptionPane.showConfirmDialog(null , "¿Esta seguro que desea borrar este pais") == 0) {
+					this.agenda.borrarPais(this.ventanaPais.getSeleccionada());
+
+					this.ventanaPersona.llenarPais(this.agenda.obtenerPais());
+					//this.ventanaEditarPersona.llenarLocalidades(this.agenda.obtenerLocalidades());
+					this.ventanaPais.llenarTabla(this.agenda.obtenerPais());
+				}
+			}
 		}
 		
 		private void ventanaAgregarProvincia(ActionEvent j) {
 			this.ventanaAgregarProvincia.mostrarVentana();
 			
+		}
+		
+		private void ventanaEditarProvincia(ActionEvent j) {
+			this.ventanaEditarProvincia.getNombreProvincia().setText(this.ventanaProvincia.getSeleccionada().getNombreProvincia());
+			this.ventanaEditarProvincia.mostrarVentana();
 		}
 		
 		private void AgregarProvincia(ActionEvent k) {
@@ -162,8 +230,47 @@ public class Controlador implements ActionListener
 			
 		}
 		
+		private void EditarProvincia(ActionEvent k) {
+			if (this.ventanaEditarProvincia.getNombreProvincia().getText().length() == 0) {
+				JOptionPane.showMessageDialog(ventanaPersona, "Debe Ingresar el nombre de la Provincia");
+			}else {
+				
+			// Añado la nueva localidad ingresada
+			ProvinciaDTO ProvinciaNuevo = new ProvinciaDTO(this.ventanaProvincia.getSeleccionada().getIdProvincia(), this.ventanaEditarProvincia.getNombreProvincia().getText());
+			
+			this.agenda.editarProvincia(ProvinciaNuevo);
+			
+			// recargo los combos y cierro la ventana
+			this.ventanaPersona.llenarProvincia(this.agenda.obtenerProvincia());
+			//this.ventanaEditarPersona.llenarPais(this.agenda.obtenerPais());
+			this.ventanaProvincia.llenarTabla(this.agenda.obtenerProvincia());
+			this.ventanaEditarProvincia.cerrar();
+			this.refrescarTabla();
+			}
+		}
+		
+		private void borrarProvincia(ActionEvent a) {
+			if (this.ventanaProvincia.getSeleccionada() == null) {
+				JOptionPane.showMessageDialog(this.ventanaProvincia, "Debe seleccionar una Provincia");
+			}else {
+				if(JOptionPane.showConfirmDialog(null , "¿Esta seguro que desea borrar esta Provincia?") == 0) {
+					this.agenda.borrarProvincia(this.ventanaProvincia.getSeleccionada());
+
+					this.ventanaPersona.llenarProvincia(this.agenda.obtenerProvincia());
+					//this.ventanaEditarPersona.llenarLocalidades(this.agenda.obtenerLocalidades());
+					this.ventanaProvincia.llenarTabla(this.agenda.obtenerProvincia());
+				}
+			}
+		}
+		
 		private void ventanaAgregarLocalidad(ActionEvent j) {
 			this.ventanaAgregarLocalidad.mostrarVentana();
+			
+		}
+		
+		private void ventanaEditarLocalidad(ActionEvent j) {
+			this.ventanaEditarLocalidad.getNombreLocalidad().setText(this.ventanaLocalidad.getSeleccionada().getNombreLocalidad());
+			this.ventanaEditarLocalidad.mostrarVentana();
 			
 		}
 		
@@ -182,12 +289,48 @@ public class Controlador implements ActionListener
 			this.ventanaLocalidad.llenarTabla(this.agenda.obtenerLocalidad());
 			this.ventanaAgregarLocalidad.cerrar();
 			}
+		}
+		
+		private void EditarLocalidad(ActionEvent k) {
+			if (this.ventanaEditarLocalidad.getNombreLocalidad().getText().length() == 0) {
+				JOptionPane.showMessageDialog(ventanaPersona, "Debe Ingresar el nombre de la Localidad");
+			}else {
+				
+			// Añado la nueva localidad ingresada
+			LocalidadDTO LocalidadNuevo = new LocalidadDTO(this.ventanaLocalidad.getSeleccionada().getIdLocalidad(), this.ventanaEditarLocalidad.getNombreLocalidad().getText());
 			
+			this.agenda.editarLocalidad(LocalidadNuevo);
+			
+			// recargo los combos y cierro la ventana
+			this.ventanaPersona.llenarLocalidad(this.agenda.obtenerLocalidad());
+			//this.ventanaEditarPersona.llenarPais(this.agenda.obtenerPais());
+			this.ventanaLocalidad.llenarTabla(this.agenda.obtenerLocalidad());
+			this.ventanaEditarLocalidad.cerrar();
+			this.refrescarTabla();
+			}
+		}
+		
+		private void borrarLocalidad(ActionEvent a) {
+			if (this.ventanaLocalidad.getSeleccionada() == null) {
+				JOptionPane.showMessageDialog(this.ventanaLocalidad, "Debe seleccionar una Localidad");
+			}else {
+				if(JOptionPane.showConfirmDialog(null , "¿Esta seguro que desea borrar esta Localidad?") == 0) {
+					this.agenda.borrarLocalidad(this.ventanaLocalidad.getSeleccionada());
+
+					this.ventanaPersona.llenarLocalidad(this.agenda.obtenerLocalidad());
+					//this.ventanaEditarPersona.llenarLocalidades(this.agenda.obtenerLocalidades());
+					this.ventanaLocalidad.llenarTabla(this.agenda.obtenerLocalidad());
+				}
+			}
 		}
 		
 		private void ventanaAgregarTipo(ActionEvent j) {
-			this.ventanaAgregarTipo.mostrarVentana();
-			
+			this.ventanaAgregarTipo.mostrarVentana();	
+		}
+		
+		private void ventanaEditarTipo(ActionEvent j) {
+			this.ventanaEditarTipo.getNombreTipo().setText(this.ventanaTipo.getSeleccionada().getNombreTipoContacto());
+			this.ventanaEditarTipo.mostrarVentana();	
 		}
 		
 		private void AgregarTipo(ActionEvent k) {
@@ -205,7 +348,39 @@ public class Controlador implements ActionListener
 			this.ventanaTipo.llenarTabla(this.agenda.obtenerTipoContactos());
 			this.ventanaAgregarTipo.cerrar();
 			}
+		}
+		
+		private void EditarTipo(ActionEvent k) {
+			if (this.ventanaEditarTipo.getNombreTipo().getText().length() == 0) {
+				JOptionPane.showMessageDialog(ventanaPersona, "Debe Ingresar el tipo de contacto");
+			}else {
+				
+			// Añado la nueva localidad ingresada
+				TipoContactoDTO tipoNuevo = new TipoContactoDTO(this.ventanaTipo.getSeleccionada().getIdTipoContacto(), this.ventanaEditarTipo.getNombreTipo().getText());
 			
+			this.agenda.editarTipoContacto(tipoNuevo);
+			
+			// recargo los combos y cierro la ventana
+			this.ventanaPersona.llenarTipos(this.agenda.obtenerTipoContactos());
+			//this.ventanaEditarPersona.llenarPais(this.agenda.obtenerPais());
+			this.ventanaTipo.llenarTabla(this.agenda.obtenerTipoContactos());
+			this.ventanaEditarTipo.cerrar();
+			this.refrescarTabla();
+			}
+		}
+		
+		private void borrarTipo(ActionEvent a) {
+			if (this.ventanaTipo.getSeleccionada() == null) {
+				JOptionPane.showMessageDialog(this.ventanaTipo, "Debe seleccionar un tipo de contacto");
+			}else {
+				if(JOptionPane.showConfirmDialog(null , "¿Esta seguro que desea borrar este tipo de contacto?") == 0) {
+					this.agenda.borrarTipoContacto(this.ventanaTipo.getSeleccionada());
+
+					this.ventanaPersona.llenarTipos(this.agenda.obtenerTipoContactos());
+					//this.ventanaEditarPersona.llenarLocalidades(this.agenda.obtenerLocalidades());
+					this.ventanaTipo.llenarTabla(this.agenda.obtenerTipoContactos());
+				}
+			}
 		}
 
 		private void editarPersona(ActionEvent c) {
