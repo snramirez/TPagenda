@@ -20,7 +20,7 @@ public class PersonaDAOSQL implements PersonaDAO
 	private static final String delete = 
 			"DELETE FROM personas WHERE idPersona = ?";
 	private static final String readall = 
-			"SELECT idPersona, Nombre, Telefono, Email, userLinkedin, Fecha_nacimiento, personas.IdDireccion, pais, provincia, localidad,codigoPostal, calle, altura, piso, departamento, personas.IdTipo,  Nombre_tipo FROM personas LEFT JOIN direccion ON personas.iddireccion = direccion.iddireccion LEFT JOIN tipo_contacto ON personas.IdTipo = tipo_contacto.idtipo";
+			"SELECT idPersona, Nombre, Telefono, Email, userLinkedin, Fecha_nacimiento, personas.IdDireccion, pais, provincia, localidad,codigoPostal, calle, altura, piso, departamento, personas.IdTipo,  Nombre_tipo FROM personas LEFT JOIN direccion ON personas.iddireccion = direccion.iddireccion LEFT JOIN tipo_contacto ON personas.IdTipo = tipo_contacto.idtipo ORDER BY codigoPostal";
 	private static final String update = 
 			"UPDATE personas SET nombre = ? , telefono = ? , email = ? ,userLinkedin = ?, Fecha_nacimiento = ? , IdDireccion = ?, IdTipo = ? WHERE idPersona = ?";
 	

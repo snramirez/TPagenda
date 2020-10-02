@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.2.0.final using JasperReports Library version 6.2.0  -->
-<!-- 2016-03-06T22:23:14 -->
+<!-- 2020-10-02T15:27:49 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Blank_A4" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" whenResourceMissingType="Empty" uuid="284e0c88-a4b2-4ff8-98a2-d67b80bcffaf">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<subDataset name="Dataset1" uuid="03961541-bb37-4772-8284-d27dbfa248f8">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+		<queryString>
+			<![CDATA[]]>
+		</queryString>
+	</subDataset>
 	<parameter name="Fecha" class="java.lang.String"/>
 	<queryString language="SQL">
 		<![CDATA[]]>
@@ -13,6 +20,28 @@
 	<field name="nombre" class="java.lang.String">
 		<fieldDescription><![CDATA[nombre]]></fieldDescription>
 	</field>
+	<field name="direccion" class="dto.DireccionDTO">
+		<fieldDescription><![CDATA[direccion]]></fieldDescription>
+	</field>
+	<group name="Group1">
+		<groupExpression><![CDATA[$F{direccion}.getCodigoPostal()]]></groupExpression>
+		<groupHeader>
+			<band height="20">
+				<textField>
+					<reportElement key="" isPrintRepeatedValues="false" mode="Opaque" x="3" y="1" width="551" height="18" backcolor="#9BF2AC" uuid="ce740530-c280-400c-ba9d-4e5701ec4ca0"/>
+					<textFieldExpression><![CDATA["Codigo postal: " + $F{direccion}.getCodigoPostal()]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="28">
+				<textField>
+					<reportElement x="431" y="10" width="100" height="18" uuid="b4817054-787b-493c-b425-fa6b5412b24e"/>
+					<textFieldExpression><![CDATA["Total: "+  $V{Group1_COUNT}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -50,41 +79,52 @@
 		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="31" splitType="Stretch">
+		<band height="30" splitType="Stretch">
 			<frame>
-				<reportElement x="2" y="6" width="550" height="23" uuid="23209a62-cc9d-4b81-8e93-aa9cc3a92b36"/>
+				<reportElement mode="Opaque" x="2" y="0" width="550" height="30" backcolor="#B8ADAD" uuid="23209a62-cc9d-4b81-8e93-aa9cc3a92b36"/>
 				<staticText>
-					<reportElement x="0" y="0" width="280" height="21" uuid="6f5462fa-eb72-479f-bb27-fb5ef7144791"/>
-					<textElement textAlignment="Center">
-						<font size="14"/>
+					<reportElement positionType="Float" x="10" y="0" width="280" height="30" backcolor="#AD9B9A" uuid="6f5462fa-eb72-479f-bb27-fb5ef7144791"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="16"/>
 					</textElement>
 					<text><![CDATA[Nombre y apellido]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="280" y="0" width="100" height="20" uuid="e2252ea3-811b-43d8-ae6b-e9b261b705f9"/>
-					<textElement textAlignment="Center">
-						<font size="14"/>
+					<reportElement x="260" y="0" width="130" height="31" uuid="e2252ea3-811b-43d8-ae6b-e9b261b705f9"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="16"/>
 					</textElement>
-					<text><![CDATA[Teléfono]]></text>
+					<text><![CDATA[Telefono]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="420" y="0" width="100" height="30" uuid="cd3a6d99-c0ea-4dd4-8823-237271a34665"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="16"/>
+					</textElement>
+					<text><![CDATA[Cod. Postal]]></text>
 				</staticText>
 			</frame>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="21" splitType="Stretch">
-			<textField>
-				<reportElement x="5" y="0" width="225" height="18" uuid="4a345b01-b751-4529-b6d6-2ccf3c13ff66"/>
-				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="285" y="1" width="215" height="18" uuid="dd3f7d4c-c2c3-4ee6-8d98-1b88fe0228ec"/>
-				<textFieldExpression><![CDATA[$F{telefono}]]></textFieldExpression>
-			</textField>
+		<band height="30">
+			<frame>
+				<reportElement x="-79" y="0" width="654" height="30" uuid="62907b66-28a7-4ad9-a188-2d8073ac4772"/>
+				<textField>
+					<reportElement x="130" y="2" width="150" height="16" uuid="d93107db-8463-4808-9f61-d34e9deda598"/>
+					<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="321" y="1" width="100" height="18" uuid="ae05830b-fc51-4c17-94d9-91eb71d2c8f1"/>
+					<textFieldExpression><![CDATA[$F{telefono}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="510" y="-1" width="100" height="18" uuid="73af5301-c695-46ed-a06c-e58bf093c9f0"/>
+					<textFieldExpression><![CDATA[$F{direccion}.getCodigoPostal()]]></textFieldExpression>
+				</textField>
+			</frame>
 		</band>
 	</detail>
-	<columnFooter>
-		<band height="7" splitType="Stretch"/>
-	</columnFooter>
 	<pageFooter>
 		<band height="33" splitType="Stretch">
 			<textField>
@@ -99,4 +139,28 @@
 			</textField>
 		</band>
 	</pageFooter>
+	<summary>
+		<band height="200">
+			<frame>
+				<reportElement x="175" y="0" width="200" height="200" uuid="e58cd9b8-0aeb-40f7-a8d2-062a227bcec9"/>
+				<pieChart>
+					<chart evaluationTime="Report">
+						<reportElement x="0" y="0" width="200" height="200" uuid="fbe99935-f364-4de3-a3b9-783e105c3cf6"/>
+						<chartTitle/>
+						<chartSubtitle/>
+						<chartLegend/>
+					</chart>
+					<pieDataset>
+						<dataset incrementType="Group" incrementGroup="Group1"/>
+						<keyExpression><![CDATA[$F{direccion}.getCodigoPostal()]]></keyExpression>
+						<valueExpression><![CDATA[$V{Group1_COUNT}]]></valueExpression>
+					</pieDataset>
+					<piePlot>
+						<plot/>
+						<itemLabel/>
+					</piePlot>
+				</pieChart>
+			</frame>
+		</band>
+	</summary>
 </jasperReport>

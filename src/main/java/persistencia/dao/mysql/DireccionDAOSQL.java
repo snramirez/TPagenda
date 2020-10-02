@@ -19,7 +19,7 @@ public class DireccionDAOSQL implements DireccionDAO {
 	private static final String delete = 
 			"DELETE FROM direccion WHERE iddireccion = ?";
 	private static final String readall = 
-			"SELECT * from direccion;";
+			"SELECT * from direccion ORDER BY codigoPostal;";
 	private static final String update = 
 			"UPDATE direccion SET pais = ?, provincia = ?, localidad = ?, codigoPostal = ?, calle = ?, altura = ?, piso = ?, departamento = ? WHERE iddireccion = ?";
 	private static final String lastInsert = 
