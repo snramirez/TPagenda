@@ -23,6 +23,9 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import dto.DireccionDTO;
+import dto.LocalidadDTO;
+import dto.PaisDTO;
+import dto.ProvinciaDTO;
 import dto.TipoContactoDTO;
 
 import javax.swing.JComboBox;
@@ -34,6 +37,10 @@ public class VentanaEditarPersona extends JFrame
 	private JTextField txtNombre;
 	private JTextField txtTelefono;
 	private JButton btnEditarPersona;
+	private JButton btnEditarPais;
+	private JButton btnEditarProv;
+	private JButton btnEditarLoc;
+	private JButton btnEditarTipo;
 	private static VentanaEditarPersona INSTANCE;
 	private JTextField txtCalle;
 	private JTextField txtAltura;
@@ -64,31 +71,32 @@ public class VentanaEditarPersona extends JFrame
 		super();
 
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 397, 429);
+		setBounds(100, 100, 397, 532);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-
+		
 		JPanel panel = new JPanel();
-		panel.setBounds(10, 11, 361, 368);
+		panel.setBounds(10, 11, 361, 471);		
 		contentPane.add(panel);
 		panel.setLayout(null);
-
+		
 		JLabel lblNombreYApellido = new JLabel("Nombre y apellido: *");
 		lblNombreYApellido.setBounds(10, 11, 113, 14);
 		panel.add(lblNombreYApellido);
-
+		
 		JLabel lblTelfono = new JLabel("Telefono: *");
 		lblTelfono.setBounds(10, 52, 113, 14);
 		panel.add(lblTelfono);
-
+		
 		txtNombre = new JTextField();
 		txtNombre.setBounds(133, 8, 207, 20);
 		panel.add(txtNombre);
 		txtNombre.setColumns(10);
-
+		
 		txtTelefono = new JTextField();
+		txtTelefono.setBounds(133, 49, 207, 20);
 		txtTelefono.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent key) {
@@ -103,28 +111,29 @@ public class VentanaEditarPersona extends JFrame
 				}
 			}
 		});
-		txtTelefono.setBounds(79, 49, 218, 20);
+
 		panel.add(txtTelefono);
 		txtTelefono.setColumns(10);
-
+		
 		btnEditarPersona = new JButton("Editar");
-		btnEditarPersona.setBounds(244, 334, 89, 23);
+		btnEditarPersona.setBounds(251, 437, 89, 23);
 		panel.add(btnEditarPersona);
-
+		
 		JLabel lblCalle = new JLabel("Calle:");
-		lblCalle.setBounds(10, 237, 46, 14);
+		lblCalle.setBounds(10, 229, 46, 14);
 		panel.add(lblCalle);
-
+		
 		txtCalle = new JTextField();
-		txtCalle.setBounds(49, 234, 152, 20);
+		txtCalle.setBounds(133, 226, 207, 20);
 		panel.add(txtCalle);
 		txtCalle.setColumns(10);
-
+		
 		JLabel lblAltura = new JLabel("Altura: ");
-		lblAltura.setBounds(10, 275, 46, 14);
+		lblAltura.setBounds(10, 267, 46, 14);
 		panel.add(lblAltura);
-
+		
 		txtAltura = new JTextField();
+		txtAltura.setBounds(52, 264, 58, 20);
 		txtAltura.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent key) {
@@ -139,15 +148,15 @@ public class VentanaEditarPersona extends JFrame
 				}
 			}
 		});
-		txtAltura.setBounds(52, 272, 58, 20);
 		panel.add(txtAltura);
 		txtAltura.setColumns(10);
-
+		
 		JLabel lblPiso = new JLabel("Piso:");
-		lblPiso.setBounds(120, 275, 46, 14);
+		lblPiso.setBounds(120, 267, 46, 14);
 		panel.add(lblPiso);
-
+		
 		txtPiso = new JTextField();
+		txtPiso.setBounds(154, 264, 46, 20);
 		txtPiso.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent key) {
@@ -162,32 +171,33 @@ public class VentanaEditarPersona extends JFrame
 				}
 			}
 		});
-		txtPiso.setBounds(153, 272, 46, 20);
+
 		panel.add(txtPiso);
 		txtPiso.setColumns(10);
-
+		
 		JLabel lblDepto = new JLabel("Depto:");
-		lblDepto.setBounds(213, 275, 46, 14);
+		lblDepto.setBounds(210, 267, 46, 14);
 		panel.add(lblDepto);
-
+    
 		txtDepto = new JTextField();
-		txtDepto.setBounds(251, 272, 46, 20);
+		txtDepto.setBounds(261, 267, 46, 20);
 		panel.add(txtDepto);
 		txtDepto.setColumns(10);
-
+		
 		JLabel lblLocalidad = new JLabel("Localidad: ");
-		lblLocalidad.setBounds(10, 202, 71, 14);
+		lblLocalidad.setBounds(10, 194, 71, 14);
 		panel.add(lblLocalidad);
-
+		
 		comboLocalidad = new JComboBox();
-		comboLocalidad.setBounds(79, 199, 134, 20);
+		comboLocalidad.setBounds(80, 190, 120, 20);
 		panel.add(comboLocalidad);
-
+		
 		JLabel lblEmail = new JLabel("Email: *");
 		lblEmail.setBounds(10, 89, 46, 14);
 		panel.add(lblEmail);
-
+		
 		txtEmail = new JTextField();
+		txtEmail.setBounds(133, 89, 207, 20);
 		txtEmail.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusLost(FocusEvent event) {
@@ -199,60 +209,74 @@ public class VentanaEditarPersona extends JFrame
 				}
 			}
 		});
-		txtEmail.setBounds(66, 88, 177, 20);
 		panel.add(txtEmail);
 		txtEmail.setColumns(10);
-
+		
 		JLabel lblCumpleaños = new JLabel("Cumpleaños:");
-		lblCumpleaños.setBounds(10, 306, 79, 14);
+		lblCumpleaños.setBounds(10, 314, 79, 14);
 		panel.add(lblCumpleaños);
-
+    
 		txtCumpleaños = new JTextField();
 		txtCumpleaños.setText("AAAA/MM/DD");
 		txtCumpleaños.setToolTipText("");
-		txtCumpleaños.setBounds(94, 303, 86, 20);
+		txtCumpleaños.setBounds(113, 314, 86, 20);
 		panel.add(txtCumpleaños);
 		txtCumpleaños.setColumns(10);
-
+		
 		JLabel lblTipo = new JLabel("Tipo: ");
-		lblTipo.setBounds(195, 306, 46, 14);
+		lblTipo.setBounds(10, 354, 46, 14);
 		panel.add(lblTipo);
-
+		
 		comboTipo = new JComboBox<TipoContactoDTO>();
-		comboTipo.setBounds(234, 303, 117, 20);
+		comboTipo.setBounds(80, 351, 117, 20);
 		panel.add(comboTipo);
-
+		
 		JLabel lblPais = new JLabel("Pais: ");
-		lblPais.setBounds(10, 167, 46, 14);
+		lblPais.setBounds(10, 133, 46, 14);
 		panel.add(lblPais);
-
 		comboPais = new JComboBox<>();
-		comboPais.setBounds(49, 164, 117, 20);
+		comboPais.setBounds(80, 130, 120, 20);
 		panel.add(comboPais);
-
+		
 		JLabel lblProvincia = new JLabel("Prov: ");
-		lblProvincia.setBounds(180, 167, 46, 14);
+		lblProvincia.setBounds(10, 161, 46, 14);
 		panel.add(lblProvincia);
-
+		
 		comboProvincia = new JComboBox();
-		comboProvincia.setBounds(219, 164, 121, 20);
+		comboProvincia.setBounds(80, 160, 120, 20);
 		panel.add(comboProvincia);
-
+		
+		btnEditarPais = new JButton("Editar");
+		btnEditarPais.setBounds(227, 130, 89, 23);
+		panel.add(btnEditarPais);
+		
+		btnEditarProv = new JButton("Editar");
+		btnEditarProv.setBounds(227, 160, 89, 23);
+		panel.add(btnEditarProv);
+		
+		btnEditarLoc = new JButton("Editar");
+		btnEditarLoc.setBounds(227, 192, 89, 23);
+		panel.add(btnEditarLoc);
+		
+		btnEditarTipo = new JButton("Editar");
+		btnEditarTipo.setBounds(227, 350, 89, 23);
+		panel.add(btnEditarTipo);		
+		
 		JLabel lblCodigoPostal = new JLabel("Cod. Postal:");
-		lblCodigoPostal.setBounds(229, 202, 68, 14);
+		lblCodigoPostal.setBounds(20, 426, 68, 14);
 		panel.add(lblCodigoPostal);
-
+		
 		txtCodigoPostal = new JTextField();
-		txtCodigoPostal.setBounds(293, 199, 58, 20);
+		txtCodigoPostal.setBounds(108, 423, 58, 20);
 		panel.add(txtCodigoPostal);
 		txtCodigoPostal.setColumns(10);
-
+		
 		JLabel lblLinkedin = new JLabel("Usuario LinkedIn: ");
-		lblLinkedin.setBounds(10, 127, 89, 14);
+		lblLinkedin.setBounds(10, 391, 89, 14);
 		panel.add(lblLinkedin);
-
+		
 		txtLinkedin = new JTextField();
-		txtLinkedin.setBounds(113, 124, 161, 20);
+		txtLinkedin.setBounds(105, 388, 161, 20);
 		panel.add(txtLinkedin);
 		txtLinkedin.setColumns(10);
 
@@ -274,39 +298,39 @@ public class VentanaEditarPersona extends JFrame
 		}
 	}
 
-	public void llenarPais(List<DireccionDTO> Direcciones)
-	{
+	public void llenarPais(List<PaisDTO> pais) 
+	{	
 		this.comboPais.removeAllItems();
 		HashSet<String> set = new HashSet<>();
-		for (DireccionDTO p : Direcciones)
+		for (PaisDTO p : pais)
 		{
-			if(!set.contains(p.getPais()))
-				this.comboPais.addItem(p.getPais());
-			set.add(p.getPais());
+			if(!set.contains(p.getNombrePais()))
+				this.comboPais.addItem(p.getNombrePais());
+			set.add(p.getNombrePais());
 		}
 	}
 
-	public void llenarProvincia(List<DireccionDTO> Direcciones)
-	{
+	public void llenarProvincia(List<ProvinciaDTO> provincia) 
+	{	
 		this.comboProvincia.removeAllItems();
 		HashSet<String> set = new HashSet<>();
-		for (DireccionDTO p : Direcciones)
+		for (ProvinciaDTO p : provincia)
 		{
-			if(!set.contains(p.getProvincia()))
-				this.comboProvincia.addItem(p.getProvincia());
-			set.add(p.getProvincia());
+			if(!set.contains(p.getNombreProvincia()))
+				this.comboProvincia.addItem(p.getNombreProvincia());
+			set.add(p.getNombreProvincia());
 		}
 	}
 
-	public void llenarLocalidad(List<DireccionDTO> Direcciones)
-	{
+	public void llenarLocalidad(List<LocalidadDTO> localidad) 
+	{	
 		this.comboLocalidad.removeAllItems();
 		HashSet<String> set = new HashSet<>();
-		for (DireccionDTO p : Direcciones)
+		for (LocalidadDTO p : localidad)
 		{
-			if(!set.contains(p.getLocalidad()))
-				this.comboLocalidad.addItem(p.getLocalidad());
-			set.add(p.getLocalidad());
+			if(!set.contains(p.getNombreLocalidad()))
+				this.comboLocalidad.addItem(p.getNombreLocalidad());
+			set.add(p.getNombreLocalidad());
 		}
 	}
 	
@@ -334,11 +358,39 @@ public class VentanaEditarPersona extends JFrame
 	{
 		return btnEditarPersona;
 	}
+	
+	public JButton getBtnEditarPais() 
+	{
+		return btnEditarPais;
+	}
+	
+	public JButton getBtnEditarProv() 
+	{
+		return btnEditarProv;
+	}
+	
+	public JButton getBtnEditarLoc() 
+	{
+		return btnEditarLoc;
+	}
+	
+	public JButton getBtnEditarTipo() 
+	{
+		return btnEditarTipo;
+	}
 
 	public void cerrar()
 	{
 		this.txtNombre.setText(null);
 		this.txtTelefono.setText(null);
+		this.txtAltura.setText(null);
+		this.txtCalle.setText(null);
+		this.txtCodigoPostal.setText(null);
+		this.txtCumpleaños.setText("AAAA/MM/DD");
+		this.txtDepto.setText(null);
+		this.txtEmail.setText(null);
+		this.txtLinkedin.setText(null);
+		this.txtPiso.setText(null);
 		this.dispose();
 	}
 }

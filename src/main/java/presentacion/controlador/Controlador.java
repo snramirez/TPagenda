@@ -72,6 +72,10 @@ public class Controlador implements ActionListener
 			
 			this.ventanaEditarPersona = VentanaEditarPersona.getInstance();
 			this.ventanaEditarPersona.getBtnEditarPersona().addActionListener(c->editarPersona(c));
+			this.ventanaEditarPersona.getBtnEditarPais().addActionListener(d->ventanaPais(d));
+			this.ventanaEditarPersona.getBtnEditarProv().addActionListener(f->ventanaProv(f));
+			this.ventanaEditarPersona.getBtnEditarLoc().addActionListener(g->ventanaLoc(g));
+			this.ventanaEditarPersona.getBtnEditarTipo().addActionListener(h->ventanaTipo(h));
 			
 			this.ventanaPais = ventanaPais.getInstance();
 			this.ventanaAgregarPais =ventanaAgregarPais.getInstance();
@@ -417,9 +421,9 @@ public class Controlador implements ActionListener
 		private void ventanaEditarPersona(ActionEvent b) 
 		{
 			this.ventanaEditarPersona.llenarTipos(this.agenda.obtenerTipoContactos());
-			this.ventanaEditarPersona.llenarPais(this.agenda.obtenerDirecciones());
-			this.ventanaEditarPersona.llenarProvincia(this.agenda.obtenerDirecciones());
-			this.ventanaEditarPersona.llenarLocalidad(this.agenda.obtenerDirecciones());
+			this.ventanaEditarPersona.llenarPais(this.agenda.obtenerPais());
+			this.ventanaEditarPersona.llenarProvincia(this.agenda.obtenerProvincia());
+			this.ventanaEditarPersona.llenarLocalidad(this.agenda.obtenerLocalidad());
 			
 			int[] filasSeleccionadas = this.vista.getTablaPersonas().getSelectedRows();
 			

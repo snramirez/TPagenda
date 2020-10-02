@@ -381,6 +381,14 @@ public class VentanaPersona extends JFrame
 	{
 		this.txtNombre.setText(null);
 		this.txtTelefono.setText(null);
+		this.txtAltura.setText(null);
+		this.txtCalle.setText(null);
+		this.txtCodigoPostal.setText(null);
+		this.txtCumpleaños.setText("AAAA/MM/DD");
+		this.txtDepto.setText(null);
+		this.txtEmail.setText(null);
+		this.txtLinkedin.setText(null);
+		this.txtPiso.setText(null);
 		this.dispose();
 	}
 }
