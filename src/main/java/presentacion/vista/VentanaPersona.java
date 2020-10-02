@@ -388,7 +388,7 @@ public class VentanaPersona extends JFrame
 		this.txtDepto.setText(null);
 		this.txtEmail.setText(null);
 		this.txtLinkedin.setText(null);
-		this.txtPiso.setText(null);
+		this.txtPiso.setText(null); 
 		this.dispose();
 	}
 }

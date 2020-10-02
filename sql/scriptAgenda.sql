@@ -5,6 +5,27 @@ USE grupo7;
 DROP TABLE IF EXISTS `personas`;
 DROP TABLE IF EXISTS `direccion`;
 DROP TABLE IF EXISTS `tipo_contacto`;
+DROP TABLE IF EXISTS `pais`;
+DROP TABLE IF EXISTS `provincia`;
+DROP TABLE IF EXISTS `localidad`;
+
+CREATE TABLE `pais` (
+  `idpais` int NOT NULL AUTO_INCREMENT,
+  `nombre_pais` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`idpais`)
+);
+
+CREATE TABLE `provincia` (
+  `idprovincia` int NOT NULL AUTO_INCREMENT,
+  `nombre_provincia` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`idprovincia`)
+);
+
+CREATE TABLE `localidad` (
+  `idlocalidad` int NOT NULL AUTO_INCREMENT,
+  `nombre_localidad` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`idlocalidad`)
+);
 
 CREATE TABLE `direccion` (
   `iddireccion` int NOT NULL AUTO_INCREMENT,
@@ -42,44 +63,21 @@ CREATE TABLE `personas` (
   CONSTRAINT `IdTipo` FOREIGN KEY (`IdTipo`) REFERENCES `tipo_contacto` (`idtipo`)
 );
 
-INSERT INTO direccion(pais) VALUES ('Argentina');
-INSERT INTO direccion(pais) VALUES ('Brasil');
-INSERT INTO direccion(pais) VALUES ('Chile');
-INSERT INTO direccion(pais) VALUES ('Colombia');
-INSERT INTO direccion(pais) VALUES ('Ecuador');
-INSERT INTO direccion(pais) VALUES ('Francia');
-INSERT INTO direccion(pais) VALUES ('Hungria');
-INSERT INTO direccion(pais) VALUES ('Japon');
-INSERT INTO direccion(pais) VALUES ('Peru');
-INSERT INTO direccion(pais) VALUES ('Rusia');
-INSERT INTO direccion(pais) VALUES ('Uruguay');
-INSERT INTO direccion(pais) VALUES ('Venezuela');
+INSERT INTO pais(Nombre_pais) VALUES ('Argentina');
+INSERT INTO pais(Nombre_pais) VALUES ('Brasil');
+INSERT INTO pais(Nombre_pais) VALUES ('Bolivia');
 
-INSERT INTO direccion(provincia) VALUES ('Buenos Aires');
-INSERT INTO direccion(provincia) VALUES ('Catamarca');
-INSERT INTO direccion(provincia) VALUES ('Chubut');
-INSERT INTO direccion(provincia) VALUES ('Formosa');
-INSERT INTO direccion(provincia) VALUES ('La Pampa');
-INSERT INTO direccion(provincia) VALUES ('Misiones');
-INSERT INTO direccion(provincia) VALUES ('San Juan');
-INSERT INTO direccion(provincia) VALUES ('Santiago del Estero');
-INSERT INTO direccion(provincia) VALUES ('Tierra del Fuego');
+INSERT INTO provincia(Nombre_provincia) VALUES ('Buenos Aires');
+INSERT INTO provincia(Nombre_provincia) VALUES ('Corboba');
+INSERT INTO provincia(Nombre_provincia) VALUES ('La Paz');
 
-INSERT INTO direccion(localidad) VALUES ('Almirante Brown');
-INSERT INTO direccion(localidad) VALUES ('Bahia Blanca');
-INSERT INTO direccion(localidad) VALUES ('Don Torcuato');
-INSERT INTO direccion(localidad) VALUES ('Hurlingham');
-INSERT INTO direccion(localidad) VALUES ('Jose C. Paz');
-INSERT INTO direccion(localidad) VALUES ('Malvinas Argentinas');
-INSERT INTO direccion(localidad) VALUES ('Mar del Plata');
-INSERT INTO direccion(localidad) VALUES ('Olivos');
-INSERT INTO direccion(localidad) VALUES ('San Fernando');
-INSERT INTO direccion(localidad) VALUES ('San Isidro');
-INSERT INTO direccion(localidad) VALUES ('San Miguel');
-INSERT INTO direccion(localidad) VALUES ('Tres de Febrero');
+INSERT INTO localidad(Nombre_localidad) VALUES ('Moreno');
+INSERT INTO localidad(Nombre_localidad) VALUES ('Ciudad de Dios');
+INSERT INTO localidad(Nombre_localidad) VALUES ('Pachamama');
 
-INSERT INTO tipo_contacto(Nombre_tipo) VALUES ('Amigo');
-INSERT INTO tipo_contacto(Nombre_tipo) VALUES ('Familia');
-INSERT INTO tipo_contacto(Nombre_tipo) VALUES ('Trabajo');
+
+INSERT INTO tipo_contacto(Nombre_tipo) VALUES ('Amigo',1);
+INSERT INTO tipo_contacto(Nombre_tipo) VALUES ('Familia',1);
+INSERT INTO tipo_contacto(Nombre_tipo) VALUES ('Trabajo',1);
 
 
