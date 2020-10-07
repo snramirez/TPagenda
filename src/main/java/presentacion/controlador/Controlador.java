@@ -69,6 +69,7 @@ public class Controlador implements ActionListener
 			this.ventanaPersona.getBtnEditarProv().addActionListener(f->ventanaProv(f));
 			this.ventanaPersona.getBtnEditarLoc().addActionListener(g->ventanaLoc(g));
 			this.ventanaPersona.getBtnEditarTipo().addActionListener(h->ventanaTipo(h));
+			this.ventanaPersona.getPais().addActionListener(l->cargarPais(l));
 			
 			this.ventanaEditarPersona = VentanaEditarPersona.getInstance();
 			this.ventanaEditarPersona.getBtnEditarPersona().addActionListener(c->editarPersona(c));
@@ -116,6 +117,10 @@ public class Controlador implements ActionListener
 			this.agenda = agenda;
 		}
 			
+		private  void cargarPais(ActionEvent l) {
+			System.out.println("hace algo");
+		}
+
 		private void ventanaProv(ActionEvent d) {
 			this.ventanaProvincia.llenarTabla(this.agenda.obtenerProvincia());
 			this.ventanaProvincia.mostrarVentana();	
