@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dto.DireccionDTO;
-import dto.PersonaDTO;
 import persistencia.conexion.Conexion;
 import persistencia.dao.interfaz.DireccionDAO;
 

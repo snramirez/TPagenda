@@ -1,6 +1,5 @@
 package presentacion.vista;
 
-import java.awt.EventQueue;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.KeyAdapter;
@@ -12,17 +11,14 @@ import java.util.regex.Pattern;
 
 import javax.swing.JFrame;
 
-import java.util.List;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import dto.DireccionDTO;
 import dto.LocalidadDTO;
 import dto.PaisDTO;
 import dto.ProvinciaDTO;
@@ -188,7 +184,7 @@ public class VentanaEditarPersona extends JFrame
 		lblLocalidad.setBounds(10, 194, 71, 14);
 		panel.add(lblLocalidad);
 		
-		comboLocalidad = new JComboBox();
+		comboLocalidad = new JComboBox<String>();
 		comboLocalidad.setBounds(80, 190, 120, 20);
 		panel.add(comboLocalidad);
 		
@@ -242,7 +238,7 @@ public class VentanaEditarPersona extends JFrame
 		lblProvincia.setBounds(10, 161, 46, 14);
 		panel.add(lblProvincia);
 		
-		comboProvincia = new JComboBox();
+		comboProvincia = new JComboBox<String>();
 		comboProvincia.setBounds(80, 160, 120, 20);
 		panel.add(comboProvincia);
 		
@@ -349,10 +345,10 @@ public class VentanaEditarPersona extends JFrame
 	public JTextField getTxtAltura(){return txtAltura;}
 	public JTextField getLinkedin(){return txtLinkedin;}
 	public JTextField getCodigoPostal(){return txtCodigoPostal;}
-	public JComboBox getTipoContacto(){return comboTipo;}
-	public JComboBox getLocalidad(){return comboLocalidad;}
-	public JComboBox getPais(){return comboPais;}
-	public JComboBox getProvincia(){return comboProvincia;}
+	public JComboBox<TipoContactoDTO> getTipoContacto(){return comboTipo;}
+	public JComboBox<String> getLocalidad(){return comboLocalidad;}
+	public JComboBox<String> getPais(){return comboPais;}
+	public JComboBox<String> getProvincia(){return comboProvincia;}
 
 	public JButton getBtnEditarPersona() 
 	{

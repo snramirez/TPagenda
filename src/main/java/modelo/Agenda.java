@@ -2,7 +2,6 @@ package modelo;
 
 import java.util.List;
 
-import com.fasterxml.jackson.core.JsonToken;
 import dto.DireccionDTO;
 import dto.LocalidadDTO;
 import dto.PaisDTO;
