@@ -77,36 +77,36 @@ public class Controlador implements ActionListener
 			this.ventanaEditarPersona.getBtnEditarLoc().addActionListener(g->ventanaLoc(g));
 			this.ventanaEditarPersona.getBtnEditarTipo().addActionListener(h->ventanaTipo(h));
 			
-			this.ventanaPais = ventanaPais.getInstance();
-			this.ventanaAgregarPais =ventanaAgregarPais.getInstance();
-			this.ventanaEditarPais = ventanaEditarPais.getInstance();
+			this.ventanaPais = VentanaPais.getInstance();
+			this.ventanaAgregarPais =VentanaAgregarPais.getInstance();
+			this.ventanaEditarPais = VentanaEditarPais.getInstance();
 			this.ventanaPais.getBtnAgregar().addActionListener(j->ventanaAgregarPais(j));
 			this.ventanaPais.getBtnEditar().addActionListener(j->ventanaEditarPais(j));
 			this.ventanaPais.getBtnBorrar().addActionListener(j->borrarPais(j));
 			this.ventanaAgregarPais.getBtnAñadir().addActionListener(k->AgregarPais(k));
 			this.ventanaEditarPais.getBtnEditar().addActionListener(k->EditarPais(k));
 			
-			this.ventanaProvincia = ventanaProvincia.getInstance();
-			this.ventanaAgregarProvincia =ventanaAgregarProvincia.getInstance();
-			this.ventanaEditarProvincia = ventanaEditarProvincia.getInstance();
+			this.ventanaProvincia = VentanaProvincia.getInstance();
+			this.ventanaAgregarProvincia =VentanaAgregarProvincia.getInstance();
+			this.ventanaEditarProvincia = VentanaEditarProvincia.getInstance();
 			this.ventanaProvincia.getBtnAgregar().addActionListener(j->ventanaAgregarProvincia(j));
 			this.ventanaProvincia.getBtnEditar().addActionListener(j->ventanaEditarProvincia(j));
 			this.ventanaProvincia.getBtnBorrar().addActionListener(j->borrarProvincia(j));
 			this.ventanaAgregarProvincia.getBtnAñadir().addActionListener(k->AgregarProvincia(k));
 			this.ventanaEditarProvincia.getBtnEditar().addActionListener(k->EditarProvincia(k));
 			
-			this.ventanaLocalidad = ventanaLocalidad.getInstance();
-			this.ventanaAgregarLocalidad =ventanaAgregarLocalidad.getInstance();
-			this.ventanaEditarLocalidad = ventanaEditarLocalidad.getInstance();
+			this.ventanaLocalidad = VentanaLocalidad.getInstance();
+			this.ventanaAgregarLocalidad =VentanaAgregarLocalidad.getInstance();
+			this.ventanaEditarLocalidad = VentanaEditarLocalidad.getInstance();
 			this.ventanaLocalidad.getBtnAgregar().addActionListener(j->ventanaAgregarLocalidad(j));
 			this.ventanaLocalidad.getBtnEditar().addActionListener(j->ventanaEditarLocalidad(j));
 			this.ventanaLocalidad.getBtnBorrar().addActionListener(j->borrarLocalidad(j));
 			this.ventanaAgregarLocalidad.getBtnAñadir().addActionListener(k->AgregarLocalidad(k));
 			this.ventanaEditarLocalidad.getBtnEditar().addActionListener(k->EditarLocalidad(k));
 			
-			this.ventanaTipo = ventanaTipo.getInstance();
-			this.ventanaAgregarTipo =ventanaAgregarTipo.getInstance();
-			this.ventanaEditarTipo = ventanaEditarTipo.getInstance();
+			this.ventanaTipo = VentanaTipo.getInstance();
+			this.ventanaAgregarTipo =VentanaAgregarTipo.getInstance();
+			this.ventanaEditarTipo = VentanaEditarTipo.getInstance();
 			this.ventanaTipo.getBtnAgregar().addActionListener(j->ventanaAgregarTipo(j));
 			this.ventanaTipo.getBtnEditar().addActionListener(j->ventanaEditarTipo(j));
 			this.ventanaTipo.getBtnBorrar().addActionListener(j->borrarTipo(j));
@@ -167,7 +167,7 @@ public class Controlador implements ActionListener
 			
 			// recargo los combos y cierro la ventana
 			this.ventanaPersona.llenarPais(this.agenda.obtenerPais());
-			//this.ventanaEditarPersona.llenarPais(this.agenda.obtenerPais());
+			this.ventanaEditarPersona.llenarPais(this.agenda.obtenerPais());
 			this.ventanaPais.llenarTabla(this.agenda.obtenerPais());
 			this.ventanaAgregarPais.cerrar();
 			}
@@ -185,7 +185,7 @@ public class Controlador implements ActionListener
 			
 			// recargo los combos y cierro la ventana
 			this.ventanaPersona.llenarPais(this.agenda.obtenerPais());
-			//this.ventanaEditarPersona.llenarPais(this.agenda.obtenerPais());
+			this.ventanaEditarPersona.llenarPais(this.agenda.obtenerPais());
 			this.ventanaPais.llenarTabla(this.agenda.obtenerPais());
 			this.ventanaEditarPais.cerrar();
 			this.refrescarTabla();
@@ -200,7 +200,7 @@ public class Controlador implements ActionListener
 					this.agenda.borrarPais(this.ventanaPais.getSeleccionada());
 
 					this.ventanaPersona.llenarPais(this.agenda.obtenerPais());
-					//this.ventanaEditarPersona.llenarLocalidades(this.agenda.obtenerLocalidades());
+					this.ventanaEditarPersona.llenarPais(this.agenda.obtenerPais());
 					this.ventanaPais.llenarTabla(this.agenda.obtenerPais());
 				}
 			}
@@ -227,7 +227,7 @@ public class Controlador implements ActionListener
 			
 			// recargo los combos y cierro la ventana
 			this.ventanaPersona.llenarProvincia(this.agenda.obtenerProvincia());
-			//this.ventanaEditarPersona.llenarPais(this.agenda.obtenerPais());
+			this.ventanaEditarPersona.llenarProvincia(this.agenda.obtenerProvincia());
 			this.ventanaProvincia.llenarTabla(this.agenda.obtenerProvincia());
 			this.ventanaAgregarProvincia.cerrar();
 			}
@@ -246,7 +246,7 @@ public class Controlador implements ActionListener
 			
 			// recargo los combos y cierro la ventana
 			this.ventanaPersona.llenarProvincia(this.agenda.obtenerProvincia());
-			//this.ventanaEditarPersona.llenarPais(this.agenda.obtenerPais());
+			this.ventanaEditarPersona.llenarProvincia(this.agenda.obtenerProvincia());
 			this.ventanaProvincia.llenarTabla(this.agenda.obtenerProvincia());
 			this.ventanaEditarProvincia.cerrar();
 			this.refrescarTabla();
@@ -261,7 +261,7 @@ public class Controlador implements ActionListener
 					this.agenda.borrarProvincia(this.ventanaProvincia.getSeleccionada());
 
 					this.ventanaPersona.llenarProvincia(this.agenda.obtenerProvincia());
-					//this.ventanaEditarPersona.llenarLocalidades(this.agenda.obtenerLocalidades());
+					this.ventanaEditarPersona.llenarProvincia(this.agenda.obtenerProvincia());
 					this.ventanaProvincia.llenarTabla(this.agenda.obtenerProvincia());
 				}
 			}
@@ -289,7 +289,7 @@ public class Controlador implements ActionListener
 			
 			// recargo los combos y cierro la ventana
 			this.ventanaPersona.llenarLocalidad(this.agenda.obtenerLocalidad());
-			//this.ventanaEditarPersona.llenarPais(this.agenda.obtenerPais());
+			this.ventanaEditarPersona.llenarLocalidad(this.agenda.obtenerLocalidad());
 			this.ventanaLocalidad.llenarTabla(this.agenda.obtenerLocalidad());
 			this.ventanaAgregarLocalidad.cerrar();
 			}
@@ -307,7 +307,7 @@ public class Controlador implements ActionListener
 			
 			// recargo los combos y cierro la ventana
 			this.ventanaPersona.llenarLocalidad(this.agenda.obtenerLocalidad());
-			//this.ventanaEditarPersona.llenarPais(this.agenda.obtenerPais());
+			this.ventanaEditarPersona.llenarLocalidad(this.agenda.obtenerLocalidad());
 			this.ventanaLocalidad.llenarTabla(this.agenda.obtenerLocalidad());
 			this.ventanaEditarLocalidad.cerrar();
 			this.refrescarTabla();
@@ -322,7 +322,7 @@ public class Controlador implements ActionListener
 					this.agenda.borrarLocalidad(this.ventanaLocalidad.getSeleccionada());
 
 					this.ventanaPersona.llenarLocalidad(this.agenda.obtenerLocalidad());
-					//this.ventanaEditarPersona.llenarLocalidades(this.agenda.obtenerLocalidades());
+					this.ventanaEditarPersona.llenarLocalidad(this.agenda.obtenerLocalidad());
 					this.ventanaLocalidad.llenarTabla(this.agenda.obtenerLocalidad());
 				}
 			}
@@ -348,7 +348,7 @@ public class Controlador implements ActionListener
 			
 			// recargo los combos y cierro la ventana
 			this.ventanaPersona.llenarTipos(this.agenda.obtenerTipoContactos());
-			//this.ventanaEditarPersona.llenarPais(this.agenda.obtenerPais());
+			this.ventanaEditarPersona.llenarTipos(this.agenda.obtenerTipoContactos());
 			this.ventanaTipo.llenarTabla(this.agenda.obtenerTipoContactos());
 			this.ventanaAgregarTipo.cerrar();
 			}
@@ -366,7 +366,7 @@ public class Controlador implements ActionListener
 			
 			// recargo los combos y cierro la ventana
 			this.ventanaPersona.llenarTipos(this.agenda.obtenerTipoContactos());
-			//this.ventanaEditarPersona.llenarPais(this.agenda.obtenerPais());
+			this.ventanaEditarPersona.llenarTipos(this.agenda.obtenerTipoContactos());
 			this.ventanaTipo.llenarTabla(this.agenda.obtenerTipoContactos());
 			this.ventanaEditarTipo.cerrar();
 			this.refrescarTabla();
@@ -381,7 +381,7 @@ public class Controlador implements ActionListener
 					this.agenda.borrarTipoContacto(this.ventanaTipo.getSeleccionada());
 
 					this.ventanaPersona.llenarTipos(this.agenda.obtenerTipoContactos());
-					//this.ventanaEditarPersona.llenarLocalidades(this.agenda.obtenerLocalidades());
+					this.ventanaEditarPersona.llenarTipos(this.agenda.obtenerTipoContactos());
 					this.ventanaTipo.llenarTabla(this.agenda.obtenerTipoContactos());
 				}
 			}
@@ -401,7 +401,6 @@ public class Controlador implements ActionListener
 			String depto = ventanaEditarPersona.getTxtDepto().getText();
 			DireccionDTO direccion = new DireccionDTO(0,pais, provincia, localidad, codigoPostal, calle, altura, piso, depto);
 
-			TipoContactoDTO tipo = (TipoContactoDTO) ventanaEditarPersona.getTipoContacto().getSelectedItem();
 
 			String nombre = this.ventanaEditarPersona.getTxtNombre().getText();
 			String tel = ventanaEditarPersona.getTxtTelefono().getText();
@@ -469,8 +468,6 @@ public class Controlador implements ActionListener
 			String piso = ventanaPersona.getTxtPiso().getText();
 			String depto = ventanaPersona.getTxtDepto().getText();
 			DireccionDTO direccion = new DireccionDTO(0,pais, provincia, localidad,codigoPostal, calle, altura, piso, depto);
-
-			TipoContactoDTO tipo = (TipoContactoDTO) ventanaPersona.getTipoContacto().getSelectedItem();
 
 			String nombre = this.ventanaPersona.getTxtNombre().getText();
 			String tel = ventanaPersona.getTxtTelefono().getText();

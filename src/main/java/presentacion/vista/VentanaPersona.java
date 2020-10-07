@@ -17,7 +17,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import dto.DireccionDTO;
 import dto.LocalidadDTO;
 import dto.PaisDTO;
 import dto.ProvinciaDTO;
@@ -183,7 +182,7 @@ public class VentanaPersona extends JFrame
 		lblLocalidad.setBounds(10, 194, 71, 14);
 		panel.add(lblLocalidad);
 		
-		comboLocalidad = new JComboBox();
+		comboLocalidad = new JComboBox<String>();
 		comboLocalidad.setBounds(80, 190, 120, 20);
 		panel.add(comboLocalidad);
 		
@@ -237,7 +236,7 @@ public class VentanaPersona extends JFrame
 		lblProvincia.setBounds(10, 161, 46, 14);
 		panel.add(lblProvincia);
 		
-		comboProvincia = new JComboBox();
+		comboProvincia = new JComboBox<String>();
 		comboProvincia.setBounds(80, 160, 120, 20);
 		panel.add(comboProvincia);
 		
@@ -274,7 +273,7 @@ public class VentanaPersona extends JFrame
 		txtLinkedin.setBounds(105, 388, 161, 20);
 		panel.add(txtLinkedin);
 		txtLinkedin.setColumns(10);
-
+		
 		
 		this.setVisible(false);
 	}
@@ -347,10 +346,10 @@ public class VentanaPersona extends JFrame
 	public JTextField getTxtAltura(){return txtAltura;}
 	public JTextField getLinkedin(){return txtLinkedin;}
 	public JTextField getCodigoPostal(){return txtCodigoPostal;}
-	public JComboBox getTipoContacto(){return comboTipo;}
-	public JComboBox getLocalidad(){return comboLocalidad;}
-	public JComboBox getPais(){return comboPais;}
-	public JComboBox getProvincia(){return comboProvincia;}
+	public JComboBox<TipoContactoDTO> getTipoContacto(){return comboTipo;}
+	public JComboBox<String> getLocalidad(){return comboLocalidad;}
+	public JComboBox<String> getPais(){return comboPais;}
+	public JComboBox<String> getProvincia(){return comboProvincia;}
 
 	public JButton getBtnAgregarPersona() 
 	{
