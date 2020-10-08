@@ -1,39 +1,30 @@
 package persistencia.dao.interfaz;
 
 import java.util.List;
-import dto.LocalidadDTO;
-import dto.PaisDTO;
-import dto.ProvinciaDTO;
+import dto.PaisProvLocDTO;
 
 public interface PaisProvLocDAO {
 	
-	public boolean insertPais(PaisDTO pais);
-	
-	public boolean insertProvincia(ProvinciaDTO provincia);
-	
-	public boolean insertLocalidad(LocalidadDTO localidad);
+	public boolean insert(PaisProvLocDTO pais);
 	
 	
-	public boolean deletePais(PaisDTO pais_a_borrar);
+	public boolean deletePais(PaisProvLocDTO pais_a_borrar);
 	
-	public boolean deleteProvincia(ProvinciaDTO provincia_a_borrar);
+	public boolean deleteProvincia(PaisProvLocDTO provincia_a_borrar);
 	
-	public boolean deleteLocalidad(LocalidadDTO localidad_a_borrar);
-	
-	
-	public boolean updatePais (PaisDTO pais_a_editar);
-	
-	public boolean updateProvincia (ProvinciaDTO provincia_a_editar);
-	
-	public boolean updateLocalidad (LocalidadDTO localidad_a_editar);
+	public boolean deleteLocalidad(PaisProvLocDTO localidad_a_borrar);
 	
 	
-	public List<PaisDTO> readAllPais(); 
+	public boolean updatePais (PaisProvLocDTO pais_a_editar, String nuevo_pais);
 	
-	public List<ProvinciaDTO> readAllProvincia(); 
+	public boolean updateProvincia (PaisProvLocDTO provincia_a_editar, String nueva_provincia);
 	
-	public List<LocalidadDTO> readAllLocalidad(); 
+	public boolean updateLocalidad (PaisProvLocDTO localidad_a_editar, String nueva_localidad);
 	
-	//public DireccionDTO lastInsert();
+	
+	public List<PaisProvLocDTO> readAll(); 
+	
+
+	
 
 }

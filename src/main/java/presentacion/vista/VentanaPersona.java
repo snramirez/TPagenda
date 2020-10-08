@@ -17,9 +17,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import dto.DireccionDTO;
 import dto.LocalidadDTO;
 import dto.PaisDTO;
+import dto.PaisProvLocDTO;
 import dto.ProvinciaDTO;
 import dto.TipoContactoDTO;
 
@@ -183,7 +183,7 @@ public class VentanaPersona extends JFrame
 		lblLocalidad.setBounds(10, 194, 71, 14);
 		panel.add(lblLocalidad);
 		
-		comboLocalidad = new JComboBox();
+		comboLocalidad = new JComboBox<String>();
 		comboLocalidad.setBounds(80, 190, 120, 20);
 		panel.add(comboLocalidad);
 		
@@ -237,7 +237,7 @@ public class VentanaPersona extends JFrame
 		lblProvincia.setBounds(10, 161, 46, 14);
 		panel.add(lblProvincia);
 		
-		comboProvincia = new JComboBox();
+		comboProvincia = new JComboBox<String>();
 		comboProvincia.setBounds(80, 160, 120, 20);
 		panel.add(comboProvincia);
 		
@@ -274,7 +274,7 @@ public class VentanaPersona extends JFrame
 		txtLinkedin.setBounds(105, 388, 161, 20);
 		panel.add(txtLinkedin);
 		txtLinkedin.setColumns(10);
-
+		
 		
 		this.setVisible(false);
 	}
@@ -296,39 +296,46 @@ public class VentanaPersona extends JFrame
 		}
 	}
 	
-	public void llenarPais(List<PaisDTO> pais) 
+	public void llenarPais(List<PaisProvLocDTO> pais) 
 	{	
 		this.comboPais.removeAllItems();
 		HashSet<String> set = new HashSet<>();
-		for (PaisDTO p : pais)
+		for (PaisProvLocDTO p : pais)
 		{
-			if(!set.contains(p.getNombrePais()))
-				this.comboPais.addItem(p.getNombrePais());
-			set.add(p.getNombrePais());
+			if(!set.contains(p.getPais()))
+				this.comboPais.addItem(p.getPais());
+			set.add(p.getPais());
 		}
 	}
 	
-	public void llenarProvincia(List<ProvinciaDTO> provincia) 
+	public void llenarProvincia(List<PaisProvLocDTO> provincia, String pais) 
 	{	
 		this.comboProvincia.removeAllItems();
 		HashSet<String> set = new HashSet<>();
-		for (ProvinciaDTO p : provincia)
+		for (PaisProvLocDTO p : provincia)
 		{
-			if(!set.contains(p.getNombreProvincia()))
-				this.comboProvincia.addItem(p.getNombreProvincia());
-			set.add(p.getNombreProvincia());
+			if(!set.contains(p.getProvincia()))
+				if(!p.getProvincia().equals(""))
+					if(p.getPais().equals(pais)) {
+						this.comboProvincia.addItem(p.getProvincia());
+						set.add(p.getProvincia());
+					}		
 		}
 	}
 	
-	public void llenarLocalidad(List<LocalidadDTO> localidad) 
+	public void llenarLocalidad(List<PaisProvLocDTO> localidad, String pais, String provincia) 
 	{	
 		this.comboLocalidad.removeAllItems();
 		HashSet<String> set = new HashSet<>();
-		for (LocalidadDTO p : localidad)
+		for (PaisProvLocDTO p : localidad)
 		{
-			if(!set.contains(p.getNombreLocalidad()))
-				this.comboLocalidad.addItem(p.getNombreLocalidad());
-			set.add(p.getNombreLocalidad());
+			if(p.getPais().equals(pais))
+				if(p.getProvincia().equals(provincia))
+					if(!p.getLocalidad().equals(""))
+						if(!set.contains(p.getLocalidad())) {
+							this.comboLocalidad.addItem(p.getLocalidad());
+							set.add(p.getLocalidad());
+						}				
 		}
 	}
 	
@@ -347,10 +354,10 @@ public class VentanaPersona extends JFrame
 	public JTextField getTxtAltura(){return txtAltura;}
 	public JTextField getLinkedin(){return txtLinkedin;}
 	public JTextField getCodigoPostal(){return txtCodigoPostal;}
-	public JComboBox getTipoContacto(){return comboTipo;}
-	public JComboBox getLocalidad(){return comboLocalidad;}
-	public JComboBox getPais(){return comboPais;}
-	public JComboBox getProvincia(){return comboProvincia;}
+	public JComboBox<TipoContactoDTO> getTipoContacto(){return comboTipo;}
+	public JComboBox<String> getLocalidad(){return comboLocalidad;}
+	public JComboBox<String> getPais(){return comboPais;}
+	public JComboBox<String> getProvincia(){return comboProvincia;}
 
 	public JButton getBtnAgregarPersona() 
 	{
