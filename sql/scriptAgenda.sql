@@ -63,6 +63,14 @@ CREATE TABLE `personas` (
   CONSTRAINT `IdTipo` FOREIGN KEY (`IdTipo`) REFERENCES `tipo_contacto` (`idtipo`)
 );
 
+CREATE TABLE `paisprovloc` (
+  `idpaisprovloc` int NOT NULL AUTO_INCREMENT,
+  `nombre_pais` varchar(45) DEFAULT NULL,
+  `nombre_provincia` varchar(45) DEFAULT NULL,
+  `nombre_localidad` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`idpaisprovloc`)
+);
+
 INSERT INTO pais(Nombre_pais) VALUES ('Argentina');
 INSERT INTO pais(Nombre_pais) VALUES ('Brasil');
 INSERT INTO pais(Nombre_pais) VALUES ('Bolivia');
