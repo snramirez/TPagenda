@@ -315,10 +315,11 @@ public class VentanaPersona extends JFrame
 		for (PaisProvLocDTO p : provincia)
 		{
 			if(!set.contains(p.getProvincia()))
-				if(p.getPais().equals(pais)) {
-					this.comboProvincia.addItem(p.getProvincia());
-					set.add(p.getProvincia());
-				}		
+				if(!p.getProvincia().equals(""))
+					if(p.getPais().equals(pais)) {
+						this.comboProvincia.addItem(p.getProvincia());
+						set.add(p.getProvincia());
+					}		
 		}
 	}
 	
@@ -330,10 +331,11 @@ public class VentanaPersona extends JFrame
 		{
 			if(p.getPais().equals(pais))
 				if(p.getProvincia().equals(provincia))
-					if(!set.contains(p.getLocalidad())) {
-						this.comboLocalidad.addItem(p.getLocalidad());
-						set.add(p.getLocalidad());
-					}				
+					if(!p.getLocalidad().equals(""))
+						if(!set.contains(p.getLocalidad())) {
+							this.comboLocalidad.addItem(p.getLocalidad());
+							set.add(p.getLocalidad());
+						}				
 		}
 	}
 	

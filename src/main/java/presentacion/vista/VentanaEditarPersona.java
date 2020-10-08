@@ -20,6 +20,7 @@ import javax.swing.border.EmptyBorder;
 
 import dto.LocalidadDTO;
 import dto.PaisDTO;
+import dto.PaisProvLocDTO;
 import dto.ProvinciaDTO;
 import dto.TipoContactoDTO;
 
@@ -293,39 +294,46 @@ public class VentanaEditarPersona extends JFrame
 		}
 	}
 
-	public void llenarPais(List<PaisDTO> pais) 
+	public void llenarPais(List<PaisProvLocDTO> pais) 
 	{	
 		this.comboPais.removeAllItems();
 		HashSet<String> set = new HashSet<>();
-		for (PaisDTO p : pais)
+		for (PaisProvLocDTO p : pais)
 		{
-			if(!set.contains(p.getNombrePais()))
-				this.comboPais.addItem(p.getNombrePais());
-			set.add(p.getNombrePais());
+			if(!set.contains(p.getPais()))
+				this.comboPais.addItem(p.getPais());
+			set.add(p.getPais());
 		}
 	}
-
-	public void llenarProvincia(List<ProvinciaDTO> provincia) 
+	
+	public void llenarProvincia(List<PaisProvLocDTO> provincia, String pais) 
 	{	
 		this.comboProvincia.removeAllItems();
 		HashSet<String> set = new HashSet<>();
-		for (ProvinciaDTO p : provincia)
+		for (PaisProvLocDTO p : provincia)
 		{
-			if(!set.contains(p.getNombreProvincia()))
-				this.comboProvincia.addItem(p.getNombreProvincia());
-			set.add(p.getNombreProvincia());
+			if(!set.contains(p.getProvincia()))
+				if(!p.getProvincia().equals(""))
+					if(p.getPais().equals(pais)) {
+						this.comboProvincia.addItem(p.getProvincia());
+						set.add(p.getProvincia());
+					}		
 		}
 	}
-
-	public void llenarLocalidad(List<LocalidadDTO> localidad) 
+	
+	public void llenarLocalidad(List<PaisProvLocDTO> localidad, String pais, String provincia) 
 	{	
 		this.comboLocalidad.removeAllItems();
 		HashSet<String> set = new HashSet<>();
-		for (LocalidadDTO p : localidad)
+		for (PaisProvLocDTO p : localidad)
 		{
-			if(!set.contains(p.getNombreLocalidad()))
-				this.comboLocalidad.addItem(p.getNombreLocalidad());
-			set.add(p.getNombreLocalidad());
+			if(p.getPais().equals(pais))
+				if(p.getProvincia().equals(provincia))
+					if(!p.getLocalidad().equals(""))
+						if(!set.contains(p.getLocalidad())) {
+							this.comboLocalidad.addItem(p.getLocalidad());
+							set.add(p.getLocalidad());
+						}				
 		}
 	}
 	
