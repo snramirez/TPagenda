@@ -7,40 +7,36 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import dto.LocalidadDTO;
-import dto.PaisDTO;
-import dto.ProvinciaDTO;
+import dto.PaisProvLocDTO;
 import persistencia.conexion.Conexion;
 import persistencia.dao.interfaz.PaisProvLocDAO;
 
 public class PaisProvLocDAOSQL implements PaisProvLocDAO{
 
-	private static final String insertPais = "INSERT INTO pais(idpais, nombre_pais) VALUES(?, ?)";
-	private static final String insertProvincia = "INSERT INTO provincia(idprovincia, nombre_provincia) VALUES(?, ?)";
-	private static final String insertLocalidad = "INSERT INTO localidad(idlocalidad, nombre_localidad) VALUES(?, ?)";
+	private static final String insert = "INSERT INTO paisprovloc(idpaisprovloc, nombre_pais, nombre_provincia, nombre_localidad) VALUES(?, ?, ?, ?)";
 	
-	private static final String deletePais = "DELETE FROM pais WHERE idpais = ?";
-	private static final String deleteProvincia = "DELETE FROM provincia WHERE idprovincia = ?";
-	private static final String deleteLocalidad = "DELETE FROM localidad WHERE idlocalidad = ?";
+	private static final String deletePais = "DELETE FROM paisprovloc WHERE nombre_pais = ?";
+	private static final String deleteProvincia = "DELETE FROM paisprovloc WHERE nombre_pais = ? AND nombre_provincia = ?";
+	private static final String deleteLocalidad = "DELETE FROM paisprovloc WHERE nombre_pais = ? AND nombre_provincia = ? AND nombre_localidad = ?";
 	
-	private static final String updatePais = "UPDATE pais SET nombre_pais = ? WHERE idpais = ?";
-	private static final String updateProvincia = "UPDATE provincia SET nombre_provincia = ? WHERE idprovincia = ?";
-	private static final String updateLocalidad = "UPDATE localidad SET nombre_localidad = ? WHERE idlocalidad = ?";
+	private static final String updatePais = "UPDATE paisprovloc SET nombre_pais = ? WHERE nombre_pais = ?";
+	private static final String updateProvincia = "UPDATE paisprovloc SET nombre_provincia = ? WHERE nombre_pais = ? AND nombre_provincia = ?";
+	private static final String updateLocalidad = "UPDATE paisprovloc SET nombre_localidad = ? WHERE nombre_pais = ? AND nombre_provincia = ? AND nombre_localidad = ?";
 	
-	private static final String readallPais = "SELECT * from pais;";
-	private static final String readallProvincia = "SELECT * from provincia;";
-	private static final String readallLocalidad = "SELECT * from localidad;";
+	private static final String readall = "SELECT * from paisprovloc;";
 	
 	@Override
-	public boolean insertPais(PaisDTO pais) {
+	public boolean insert(PaisProvLocDTO pais) {
 		PreparedStatement statement;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
 		boolean isInsertExitoso = false;
 		try 
 		{
-			statement = conexion.prepareStatement(insertPais);
-			statement.setInt(1, pais.getIdPais());
-			statement.setString(2, pais.getNombrePais());
+			statement = conexion.prepareStatement(insert);
+			statement.setInt(1, pais.getIdPaisProvLoc());
+			statement.setString(2, pais.getPais());
+			statement.setString(3, pais.getProvincia());
+			statement.setString(4, pais.getLocalidad());
 		
 			if(statement.executeUpdate() > 0)
 			{
@@ -63,76 +59,14 @@ public class PaisProvLocDAOSQL implements PaisProvLocDAO{
 	}
 
 	@Override
-	public boolean insertProvincia(ProvinciaDTO provincia) {
-		PreparedStatement statement;
-		Connection conexion = Conexion.getConexion().getSQLConexion();
-		boolean isInsertExitoso = false;
-		try 
-		{
-			statement = conexion.prepareStatement(insertProvincia);
-			statement.setInt(1, provincia.getIdProvincia());
-			statement.setString(2, provincia.getNombreProvincia());
-		
-			if(statement.executeUpdate() > 0)
-			{
-				conexion.commit();
-				isInsertExitoso = true;
-			}
-			
-		}
-		catch (SQLException e) 
-		{
-			e.printStackTrace();
-			try {
-				conexion.rollback();
-			} catch (SQLException e1) {
-				e1.printStackTrace();
-			
-			}			
-		}
-		return isInsertExitoso;
-	}
-
-	@Override
-	public boolean insertLocalidad(LocalidadDTO localidad) {
-		PreparedStatement statement;
-		Connection conexion = Conexion.getConexion().getSQLConexion();
-		boolean isInsertExitoso = false;
-		try 
-		{
-			statement = conexion.prepareStatement(insertLocalidad);
-			statement.setInt(1, localidad.getIdLocalidad());
-			statement.setString(2, localidad.getNombreLocalidad());
-		
-			if(statement.executeUpdate() > 0)
-			{
-				conexion.commit();
-				isInsertExitoso = true;
-			}
-			
-		}
-		catch (SQLException e) 
-		{
-			e.printStackTrace();
-			try {
-				conexion.rollback();
-			} catch (SQLException e1) {
-				e1.printStackTrace();
-			
-			}			
-		}
-		return isInsertExitoso;
-	}
-
-	@Override
-	public boolean deletePais(PaisDTO pais_a_borrar) {
+	public boolean deletePais(PaisProvLocDTO pais_a_borrar) {
 		PreparedStatement statement;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
 		boolean isdeleteExitoso = false;
 		try 
 		{
 			statement = conexion.prepareStatement(deletePais);
-			statement.setString(1, Integer.toString(pais_a_borrar.getIdPais()));
+			statement.setString(1, pais_a_borrar.getPais());
 			if(statement.executeUpdate() > 0)
 			{
 				conexion.commit();
@@ -147,14 +81,15 @@ public class PaisProvLocDAOSQL implements PaisProvLocDAO{
 	}
 
 	@Override
-	public boolean deleteProvincia(ProvinciaDTO provincia_a_borrar) {
+	public boolean deleteProvincia(PaisProvLocDTO provincia_a_borrar) {
 		PreparedStatement statement;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
 		boolean isdeleteExitoso = false;
 		try 
 		{
 			statement = conexion.prepareStatement(deleteProvincia);
-			statement.setString(1, Integer.toString(provincia_a_borrar.getIdProvincia()));
+			statement.setString(1, provincia_a_borrar.getPais());
+			statement.setString(2, provincia_a_borrar.getProvincia());
 			if(statement.executeUpdate() > 0)
 			{
 				conexion.commit();
@@ -169,14 +104,16 @@ public class PaisProvLocDAOSQL implements PaisProvLocDAO{
 	}
 
 	@Override
-	public boolean deleteLocalidad(LocalidadDTO localidad_a_borrar) {
+	public boolean deleteLocalidad(PaisProvLocDTO localidad_a_borrar) {
 		PreparedStatement statement;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
 		boolean isdeleteExitoso = false;
 		try 
 		{
 			statement = conexion.prepareStatement(deleteLocalidad);
-			statement.setString(1, Integer.toString(localidad_a_borrar.getIdLocalidad()));
+			statement.setString(1, localidad_a_borrar.getPais());
+			statement.setString(2, localidad_a_borrar.getProvincia());
+			statement.setString(3, localidad_a_borrar.getLocalidad());
 			if(statement.executeUpdate() > 0)
 			{
 				conexion.commit();
@@ -191,15 +128,15 @@ public class PaisProvLocDAOSQL implements PaisProvLocDAO{
 	}
 
 	@Override
-	public boolean updatePais(PaisDTO pais_a_editar) {
+	public boolean updatePais(PaisProvLocDTO pais_a_editar, String nuevo_pais) {
 		PreparedStatement statement;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
 		boolean isUpdateExitoso = false;
 		try
 		{
 			statement = conexion.prepareStatement(updatePais);
-			statement.setString(1, pais_a_editar.getNombrePais());
-			statement.setInt(2, pais_a_editar.getIdPais());
+			statement.setString(1, nuevo_pais);
+			statement.setString(2, pais_a_editar.getPais());
 			if(statement.executeUpdate() > 0)
 			{
 				conexion.commit();
@@ -220,15 +157,16 @@ public class PaisProvLocDAOSQL implements PaisProvLocDAO{
 	}
 
 	@Override
-	public boolean updateProvincia(ProvinciaDTO provincia_a_editar) {
+	public boolean updateProvincia(PaisProvLocDTO provincia_a_editar, String nueva_provincia) {
 		PreparedStatement statement;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
 		boolean isUpdateExitoso = false;
 		try
 		{
 			statement = conexion.prepareStatement(updateProvincia);
-			statement.setString(1, provincia_a_editar.getNombreProvincia());
-			statement.setInt(2, provincia_a_editar.getIdProvincia());
+			statement.setString(1, nueva_provincia);
+			statement.setString(2, provincia_a_editar.getPais());
+			statement.setString(3, provincia_a_editar.getProvincia());
 			if(statement.executeUpdate() > 0)
 			{
 				conexion.commit();
@@ -249,15 +187,17 @@ public class PaisProvLocDAOSQL implements PaisProvLocDAO{
 	}
 
 	@Override
-	public boolean updateLocalidad(LocalidadDTO localidad_a_editar) {
+	public boolean updateLocalidad(PaisProvLocDTO localidad_a_editar, String nueva_localidad) {
 		PreparedStatement statement;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
 		boolean isUpdateExitoso = false;
 		try
 		{
 			statement = conexion.prepareStatement(updateLocalidad);
-			statement.setString(1, localidad_a_editar.getNombreLocalidad());
-			statement.setInt(2, localidad_a_editar.getIdLocalidad());
+			statement.setString(1, nueva_localidad);
+			statement.setString(2, localidad_a_editar.getPais());
+			statement.setString(3, localidad_a_editar.getProvincia());
+			statement.setString(4, localidad_a_editar.getLocalidad());
 			if(statement.executeUpdate() > 0)
 			{
 				conexion.commit();
@@ -278,18 +218,18 @@ public class PaisProvLocDAOSQL implements PaisProvLocDAO{
 	}
 
 	@Override
-	public List<PaisDTO> readAllPais() {
+	public List<PaisProvLocDTO> readAll() {
 		PreparedStatement statement;
 		ResultSet resultSet; //Guarda el resultado de la query
-		ArrayList<PaisDTO> pais = new ArrayList<PaisDTO>();
+		ArrayList<PaisProvLocDTO> pais = new ArrayList<PaisProvLocDTO>();
 		Conexion conexion = Conexion.getConexion();
 		try 
 		{
-			statement = conexion.getSQLConexion().prepareStatement(readallPais);
+			statement = conexion.getSQLConexion().prepareStatement(readall);
 			resultSet = statement.executeQuery();
 			while(resultSet.next())
 			{
-				pais.add(getPaisDTO(resultSet));
+				pais.add(getPaisProvLocDTO(resultSet));
 			}
 		} 
 		catch (SQLException e) 
@@ -298,73 +238,16 @@ public class PaisProvLocDAOSQL implements PaisProvLocDAO{
 		}
 		return pais;
 	}
-
-	@Override
-	public List<ProvinciaDTO> readAllProvincia() {
-		PreparedStatement statement;
-		ResultSet resultSet; //Guarda el resultado de la query
-		ArrayList<ProvinciaDTO> provincia = new ArrayList<ProvinciaDTO>();
-		Conexion conexion = Conexion.getConexion();
-		try 
-		{
-			statement = conexion.getSQLConexion().prepareStatement(readallProvincia);
-			resultSet = statement.executeQuery();
-			while(resultSet.next())
-			{
-				provincia.add(getProvinciaDTO(resultSet));
-			}
-		} 
-		catch (SQLException e) 
-		{
-			e.printStackTrace();
-		}
-		return provincia;
-	}
-
-	@Override
-	public List<LocalidadDTO> readAllLocalidad() {
-		PreparedStatement statement;
-		ResultSet resultSet; //Guarda el resultado de la query
-		ArrayList<LocalidadDTO> localidad = new ArrayList<LocalidadDTO>();
-		Conexion conexion = Conexion.getConexion();
-		try 
-		{
-			statement = conexion.getSQLConexion().prepareStatement(readallLocalidad);
-			resultSet = statement.executeQuery();
-			while(resultSet.next())
-			{
-				localidad.add(getLocalidadDTO(resultSet));
-			}
-		} 
-		catch (SQLException e) 
-		{
-			e.printStackTrace();
-		}
-		return localidad;
-	}
 	
-	private PaisDTO getPaisDTO(ResultSet resultSet) throws SQLException 
+	private PaisProvLocDTO getPaisProvLocDTO(ResultSet resultSet) throws SQLException 
 	{
-		int id = resultSet.getInt("idpais");
+		int id = resultSet.getInt("idpaisprovloc");
 		String nombre_pais = resultSet.getString("nombre_pais");
-		
-		return new PaisDTO(id, nombre_pais);
-	}
-	
-	private ProvinciaDTO getProvinciaDTO(ResultSet resultSet) throws SQLException 
-	{
-		int id = resultSet.getInt("idprovincia");
 		String nombre_provincia = resultSet.getString("nombre_provincia");
-		
-		return new ProvinciaDTO(id, nombre_provincia);
-	}
-	
-	private LocalidadDTO getLocalidadDTO(ResultSet resultSet) throws SQLException 
-	{
-		int id = resultSet.getInt("idlocalidad");
 		String nombre_localidad = resultSet.getString("nombre_localidad");
 		
-		return new LocalidadDTO(id, nombre_localidad);
+		return new PaisProvLocDTO(id, nombre_pais, nombre_provincia, nombre_localidad);
 	}
+	
 
 }

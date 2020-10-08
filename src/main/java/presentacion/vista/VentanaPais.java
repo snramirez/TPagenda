@@ -5,6 +5,9 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import dto.PaisDTO;
+import dto.PaisProvLocDTO;
+
+import java.util.HashSet;
 import java.util.List;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -18,8 +21,8 @@ public class VentanaPais extends JFrame {
 	
 	private static VentanaPais INSTANCE;
 	private JPanel contentPane;
-	private DefaultListModel<PaisDTO> modeloPais;
-	private JList<PaisDTO> listaPais;
+	private DefaultListModel<String> modeloPais;
+	private JList<String> listaPais;
 	private JButton btnAgregar;
 	private JButton btnBorrar;
 	private JButton btnEditar;
@@ -56,9 +59,9 @@ public class VentanaPais extends JFrame {
 		panel.add(spPersonas);
 		
 		
-		modeloPais = new DefaultListModel<PaisDTO>();
+		modeloPais = new DefaultListModel<String>();
 		
-		listaPais = new JList<PaisDTO>(modeloPais);
+		listaPais = new JList<String>(modeloPais);
 		listaPais.setBounds(12, 555, 291, -509);
 		listaPais.setVisibleRowCount(10);
 		listaPais.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -83,11 +86,11 @@ public class VentanaPais extends JFrame {
 			
 	}
 	
-	public DefaultListModel<PaisDTO> getModeloPais() {
+	public DefaultListModel<String> getModeloPais() {
 		return modeloPais;
 	}
-	public PaisDTO getSeleccionada() {
-		return (PaisDTO) this.listaPais.getSelectedValue();
+	public String getSeleccionada() {
+		return this.listaPais.getSelectedValue().toString();
 	}
 
 	public JButton getBtnAgregar() {
@@ -102,10 +105,13 @@ public class VentanaPais extends JFrame {
 		return btnEditar;
 	}
 
-	public void llenarTabla(List<PaisDTO> paises) {
+	public void llenarTabla(List<PaisProvLocDTO> paises) {
 		this.modeloPais.removeAllElements();
-		for(PaisDTO l : paises) {
-			this.modeloPais.addElement(l);
+		HashSet<String> set = new HashSet<>();
+		for(PaisProvLocDTO l : paises) {
+			if(!set.contains(l.getPais()))
+				this.modeloPais.addElement(l.getPais());
+			set.add(l.getPais());
 		}
 	
 	}
