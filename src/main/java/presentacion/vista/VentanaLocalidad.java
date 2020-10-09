@@ -12,7 +12,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
-import dto.LocalidadDTO;
 import dto.PaisProvLocDTO;
 
 

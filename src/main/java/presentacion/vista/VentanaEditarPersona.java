@@ -18,10 +18,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import dto.LocalidadDTO;
-import dto.PaisDTO;
+
 import dto.PaisProvLocDTO;
-import dto.ProvinciaDTO;
 import dto.TipoContactoDTO;
 
 import javax.swing.JComboBox;

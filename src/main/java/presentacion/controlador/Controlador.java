@@ -7,8 +7,6 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 import dto.DireccionDTO;
-import dto.LocalidadDTO;
-import dto.PaisDTO;
 import dto.PaisProvLocDTO;
 import dto.TipoContactoDTO;
 import modelo.Agenda;
@@ -31,7 +29,6 @@ import presentacion.vista.VentanaEditarTipo;
 import presentacion.vista.VentanaPersona;
 import presentacion.vista.Vista;
 import dto.PersonaDTO;
-import dto.ProvinciaDTO;
 
 public class Controlador implements ActionListener
 {

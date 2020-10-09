@@ -1,13 +1,5 @@
-DROP DATABASE IF EXISTS `grupo7`;
-CREATE DATABASE `grupo7`;
+CREATE DATABASE IF NOT EXISTS `grupo7`;
 USE grupo7;
-
-DROP TABLE IF EXISTS `personas`;
-DROP TABLE IF EXISTS `direccion`;
-DROP TABLE IF EXISTS `tipo_contacto`;
-DROP TABLE IF EXISTS `pais`;
-DROP TABLE IF EXISTS `provincia`;
-DROP TABLE IF EXISTS `localidad`;
 
 CREATE TABLE `pais` (
   `idpais` int NOT NULL AUTO_INCREMENT,
@@ -84,8 +76,6 @@ INSERT INTO localidad(Nombre_localidad) VALUES ('Ciudad de Dios');
 INSERT INTO localidad(Nombre_localidad) VALUES ('Pachamama');
 
 
-INSERT INTO tipo_contacto(Nombre_tipo) VALUES ('Amigo',1);
-INSERT INTO tipo_contacto(Nombre_tipo) VALUES ('Familia',1);
-INSERT INTO tipo_contacto(Nombre_tipo) VALUES ('Trabajo',1);
-
-
+INSERT INTO tipo_contacto(Nombre_tipo) VALUES ('Amigo');
+INSERT INTO tipo_contacto(Nombre_tipo) VALUES ('Familia');
+INSERT INTO tipo_contacto(Nombre_tipo) VALUES ('Trabajo');

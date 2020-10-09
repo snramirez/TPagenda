@@ -15,7 +15,6 @@ import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
 
 import dto.PaisProvLocDTO;
-import dto.ProvinciaDTO;
 
 
 public class VentanaProvincia extends JFrame{

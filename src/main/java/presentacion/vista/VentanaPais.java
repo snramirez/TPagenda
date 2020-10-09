@@ -4,7 +4,6 @@ import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import dto.PaisDTO;
 import dto.PaisProvLocDTO;
 
 import java.util.HashSet;
