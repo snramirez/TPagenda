@@ -21,8 +21,9 @@ public class Conexion
 	{
 		try
 		{
-			Class.forName("com.mysql.cj.jdbc.Driver"); // quitar si no es necesario
-			this.connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/grupo7?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true",user,password);
+			//Class.forName("com.mysql.cj.jdbc.Driver"); // quitar si no es necesario
+			Class.forName("org.mariadb.jdbc.Driver");
+			this.connection = DriverManager.getConnection("jdbc:mariadb://localhost:3306/grupo7?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true",user,password);
 			this.connection.setAutoCommit(false);
 			log.info("Conexión exitosa");
 			connected = true;
